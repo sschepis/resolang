@@ -1,0 +1,50 @@
+{
+  "name": "@sschepis/resolang",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "build/resolang.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sschepis/resolang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sschepis/resolang/issues"
+  },
+  "homepage": "https://github.com/sschepis/resolang#readme",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "build": "asc assembly/index.ts --target release --outFile build/resolang.wasm",
+    "build:runtime": "asc assembly/index.ts --target release --outFile build/resolang.wasm",
+    "build:all": "npm run build && npm run build:tests",
+    "build:tests": "asc assembly/test-index.ts --target release --outFile build/test-core.wasm",
+    "start": "node run.js",
+    "test": "node test-runner.js",
+    "test:wasm": "node test-runner.js build/test-core.wasm",
+    "test:build": "npm run build:tests && npm run test:wasm"
+  },
+  "keywords": [
+    "resolang",
+    "prime-resonance",
+    "quantum",
+    "network"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "ResoLang - Core quantum resonance computation library",
+  "devDependencies": {
+    "assemblyscript": "^0.27.37"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.27.37",
+    "ws": "^8.16.0"
+  },
+  "types": "build/resolang.d.ts",
+  "files": [
+    "build/",
+    "assembly/",
+    "README.md",
+    "LICENSE"
+  ]
+}

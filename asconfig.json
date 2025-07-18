@@ -1,0 +1,27 @@
+{
+  "targets": {
+    "debug": {
+      "outFile": "build/resolang.wasm",
+      "textFile": "build/resolang.wat",
+      "sourceMap": true,
+      "debug": true
+    },
+    "release": {
+      "outFile": "build/resolang.wasm",
+      "textFile": "build/resolang.wat",
+      "sourceMap": false,
+      "optimize": true
+    }
+  },
+  "options": {
+    "bindings": "esm",
+    "runtime": "incremental",
+    "exportRuntime": true,
+    "importMemory": false,
+    "initialMemory": 2,
+    "maximumMemory": 16,
+    "zeroFilledMemory": true,
+    "memoryBase": 0,
+    "tableBase": 0
+  }
+}
