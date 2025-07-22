@@ -48,40 +48,6 @@ async function instantiate(module, imports = {}) {
       node = __lowerInternref(node) || __notnull();
       exports.setCurrentNode(node);
     },
-    ProtocolType: (values => (
-      // assembly/types/ProtocolType
-      values[values.EIP = exports["ProtocolType.EIP"].valueOf()] = "EIP",
-      values[values.MTP = exports["ProtocolType.MTP"].valueOf()] = "MTP",
-      values[values.RRP = exports["ProtocolType.RRP"].valueOf()] = "RRP",
-      values[values.PSP = exports["ProtocolType.PSP"].valueOf()] = "PSP",
-      values
-    ))({}),
-    NetworkError: (values => (
-      // assembly/types/NetworkError
-      values[values.NODE_NOT_FOUND = exports["NetworkError.NODE_NOT_FOUND"].valueOf()] = "NODE_NOT_FOUND",
-      values[values.NODE_ALREADY_EXISTS = exports["NetworkError.NODE_ALREADY_EXISTS"].valueOf()] = "NODE_ALREADY_EXISTS",
-      values[values.ENTANGLEMENT_FAILED = exports["NetworkError.ENTANGLEMENT_FAILED"].valueOf()] = "ENTANGLEMENT_FAILED",
-      values[values.LOW_COHERENCE = exports["NetworkError.LOW_COHERENCE"].valueOf()] = "LOW_COHERENCE",
-      values[values.NOT_ENTANGLED = exports["NetworkError.NOT_ENTANGLED"].valueOf()] = "NOT_ENTANGLED",
-      values[values.MEMORY_FULL = exports["NetworkError.MEMORY_FULL"].valueOf()] = "MEMORY_FULL",
-      values[values.NETWORK_UNSTABLE = exports["NetworkError.NETWORK_UNSTABLE"].valueOf()] = "NETWORK_UNSTABLE",
-      values[values.INVALID_PRIME = exports["NetworkError.INVALID_PRIME"].valueOf()] = "INVALID_PRIME",
-      values[values.SYNCHRONIZATION_FAILED = exports["NetworkError.SYNCHRONIZATION_FAILED"].valueOf()] = "SYNCHRONIZATION_FAILED",
-      values
-    ))({}),
-    ProtocolError: (values => (
-      // assembly/types/ProtocolError
-      values[values.TIMEOUT = exports["ProtocolError.TIMEOUT"].valueOf()] = "TIMEOUT",
-      values[values.INVALID_MESSAGE = exports["ProtocolError.INVALID_MESSAGE"].valueOf()] = "INVALID_MESSAGE",
-      values[values.NOT_ENTANGLED = exports["ProtocolError.NOT_ENTANGLED"].valueOf()] = "NOT_ENTANGLED",
-      values[values.LOW_COHERENCE = exports["ProtocolError.LOW_COHERENCE"].valueOf()] = "LOW_COHERENCE",
-      values[values.ROUTE_NOT_FOUND = exports["ProtocolError.ROUTE_NOT_FOUND"].valueOf()] = "ROUTE_NOT_FOUND",
-      values[values.SYNC_FAILED = exports["ProtocolError.SYNC_FAILED"].valueOf()] = "SYNC_FAILED",
-      values[values.FIDELITY_TOO_LOW = exports["ProtocolError.FIDELITY_TOO_LOW"].valueOf()] = "FIDELITY_TOO_LOW",
-      values[values.MESSAGE_TOO_LARGE = exports["ProtocolError.MESSAGE_TOO_LARGE"].valueOf()] = "MESSAGE_TOO_LARGE",
-      values[values.SIGNATURE_INVALID = exports["ProtocolError.SIGNATURE_INVALID"].valueOf()] = "SIGNATURE_INVALID",
-      values
-    ))({}),
     tensor(fragmentA, fragmentB) {
       // assembly/operators/tensor(assembly/resonlang/ResonantFragment, assembly/resonlang/ResonantFragment) => assembly/resonlang/ResonantFragment
       fragmentA = __retain(__lowerInternref(fragmentA) || __notnull());
@@ -116,7 +82,7 @@ async function instantiate(module, imports = {}) {
       // assembly/operators/route(assembly/resonlang/EntangledNode, assembly/resonlang/EntangledNode, ~lib/array/Array<assembly/resonlang/EntangledNode>) => bool
       source = __retain(__lowerInternref(source) || __notnull());
       target = __retain(__lowerInternref(target) || __notnull());
-      viaNodes = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 123, 2, viaNodes) || __notnull();
+      viaNodes = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 173, 2, viaNodes) || __notnull();
       try {
         return exports.route(source, target, viaNodes) != 0;
       } finally {
@@ -164,36 +130,6 @@ async function instantiate(module, imports = {}) {
       remote = __lowerInternref(remote) || __notnull();
       return __liftArray(__getF64, 3, exports.observe(remote) >>> 0);
     },
-    primeOperator(state) {
-      // assembly/prime-resonance/primeOperator(assembly/prime-resonance/PrimeState) => ~lib/map/Map<i32,f64>
-      state = __lowerInternref(state) || __notnull();
-      return __liftInternref(exports.primeOperator(state) >>> 0);
-    },
-    factorizationOperator(n) {
-      // assembly/prime-resonance/factorizationOperator(u32) => assembly/prime-resonance/PrimeState
-      return __liftInternref(exports.factorizationOperator(n) >>> 0);
-    },
-    coherenceOperator(state, n) {
-      // assembly/prime-resonance/coherenceOperator(assembly/prime-resonance/PrimeState, u32) => f64
-      state = __lowerInternref(state) || __notnull();
-      return exports.coherenceOperator(state, n);
-    },
-    primeSpectrum(state) {
-      // assembly/prime-resonance/primeSpectrum(assembly/prime-resonance/PrimeState) => ~lib/map/Map<i32,f64>
-      state = __lowerInternref(state) || __notnull();
-      return __liftInternref(exports.primeSpectrum(state) >>> 0);
-    },
-    symbolicCollapse(initialStates, coefficients, maxIterations, entropyThreshold) {
-      // assembly/prime-resonance/symbolicCollapse(~lib/array/Array<assembly/prime-resonance/PrimeState>, ~lib/array/Array<f64>, i32?, f64?) => assembly/prime-resonance/PrimeState
-      initialStates = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 130, 2, initialStates) || __notnull());
-      coefficients = __lowerArray(__setF64, 7, 3, coefficients) || __notnull();
-      try {
-        exports.__setArgumentsLength(arguments.length);
-        return __liftInternref(exports.symbolicCollapse(initialStates, coefficients, maxIterations, entropyThreshold) >>> 0);
-      } finally {
-        __release(initialStates);
-      }
-    },
     transmitQuaternionicMessage(sender, receiver, message, synchronizer) {
       // assembly/quaternion-entanglement/transmitQuaternionicMessage(assembly/quaternion-entanglement/QuaternionicAgent, assembly/quaternion-entanglement/QuaternionicAgent, ~lib/string/String, assembly/quaternion-entanglement/QuaternionicSynchronizer) => bool
       sender = __retain(__lowerInternref(sender) || __notnull());
@@ -207,21 +143,6 @@ async function instantiate(module, imports = {}) {
         __release(receiver);
         __release(message);
       }
-    },
-    superpose(states) {
-      // assembly/quantum-ops-impl/superpose(~lib/array/Array<assembly/prime-resonance/PrimeState>) => assembly/prime-resonance/PrimeState
-      states = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 130, 2, states) || __notnull();
-      return __liftInternref(exports.superpose(states) >>> 0);
-    },
-    measure(state) {
-      // assembly/quantum-ops-impl/measure(assembly/prime-resonance/PrimeState) => u32
-      state = __lowerInternref(state) || __notnull();
-      return exports.measure(state) >>> 0;
-    },
-    collapse(state, prime) {
-      // assembly/quantum-ops-impl/collapse(assembly/prime-resonance/PrimeState, u32) => assembly/prime-resonance/PrimeState
-      state = __lowerInternref(state) || __notnull();
-      return __liftInternref(exports.collapse(state, prime) >>> 0);
     },
     entropyRate(phaseRing) {
       // assembly/utils/entropyRate(~lib/array/Array<f64>) => f64
@@ -259,34 +180,6 @@ async function instantiate(module, imports = {}) {
       // assembly/entropy-viz/exportEntropyHistory() => ~lib/string/String
       return __liftString(exports.exportEntropyHistory() >>> 0);
     },
-    escapeJSON(str) {
-      // assembly/core/serialization/escapeJSON(~lib/string/String) => ~lib/string/String
-      str = __lowerString(str) || __notnull();
-      return __liftString(exports.escapeJSON(str) >>> 0);
-    },
-    toFixed(value, decimals) {
-      // assembly/core/serialization/toFixed(f64, i32) => ~lib/string/String
-      return __liftString(exports.toFixed(value, decimals) >>> 0);
-    },
-    serializeString(value) {
-      // assembly/core/serialization/serializeString(~lib/string/String) => ~lib/string/String
-      value = __lowerString(value) || __notnull();
-      return __liftString(exports.serializeString(value) >>> 0);
-    },
-    serializeNumber(value) {
-      // assembly/core/serialization/serializeNumber(f64) => ~lib/string/String
-      return __liftString(exports.serializeNumber(value) >>> 0);
-    },
-    serializeBoolean(value) {
-      // assembly/core/serialization/serializeBoolean(bool) => ~lib/string/String
-      value = value ? 1 : 0;
-      return __liftString(exports.serializeBoolean(value) >>> 0);
-    },
-    serializeInteger(value) {
-      // assembly/core/serialization/serializeInteger(i64) => ~lib/string/String
-      value = value || 0n;
-      return __liftString(exports.serializeInteger(value) >>> 0);
-    },
     validateString() {
       // assembly/core/validation/validateString() => assembly/core/validation/StringValidationBuilder
       return __liftInternref(exports.validateString() >>> 0);
@@ -314,9 +207,9 @@ async function instantiate(module, imports = {}) {
     },
     simdArrayMul(a, b, result) {
       // assembly/core/math-optimized/simdArrayMul(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => void
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __retain(__lowerTypedArray(Float64Array, 135, 3, b) || __notnull());
-      result = __lowerTypedArray(Float64Array, 135, 3, result) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __retain(__lowerTypedArray(Float64Array, 181, 3, b) || __notnull());
+      result = __lowerTypedArray(Float64Array, 181, 3, result) || __notnull();
       try {
         exports.simdArrayMul(a, b, result);
       } finally {
@@ -326,9 +219,9 @@ async function instantiate(module, imports = {}) {
     },
     simdArrayAdd(a, b, result) {
       // assembly/core/math-optimized/simdArrayAdd(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => void
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __retain(__lowerTypedArray(Float64Array, 135, 3, b) || __notnull());
-      result = __lowerTypedArray(Float64Array, 135, 3, result) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __retain(__lowerTypedArray(Float64Array, 181, 3, b) || __notnull());
+      result = __lowerTypedArray(Float64Array, 181, 3, result) || __notnull();
       try {
         exports.simdArrayAdd(a, b, result);
       } finally {
@@ -338,8 +231,8 @@ async function instantiate(module, imports = {}) {
     },
     simdDotProduct(a, b) {
       // assembly/core/math-optimized/simdDotProduct(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => f64
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __lowerTypedArray(Float64Array, 135, 3, b) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __lowerTypedArray(Float64Array, 181, 3, b) || __notnull();
       try {
         return exports.simdDotProduct(a, b);
       } finally {
@@ -445,9 +338,9 @@ async function instantiate(module, imports = {}) {
     },
     arrayMul(a, b, result) {
       // assembly/core/math-operations/arrayMul(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => void
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __retain(__lowerTypedArray(Float64Array, 135, 3, b) || __notnull());
-      result = __lowerTypedArray(Float64Array, 135, 3, result) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __retain(__lowerTypedArray(Float64Array, 181, 3, b) || __notnull());
+      result = __lowerTypedArray(Float64Array, 181, 3, result) || __notnull();
       try {
         exports.arrayMul(a, b, result);
       } finally {
@@ -457,9 +350,9 @@ async function instantiate(module, imports = {}) {
     },
     arrayAdd(a, b, result) {
       // assembly/core/math-operations/arrayAdd(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => void
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __retain(__lowerTypedArray(Float64Array, 135, 3, b) || __notnull());
-      result = __lowerTypedArray(Float64Array, 135, 3, result) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __retain(__lowerTypedArray(Float64Array, 181, 3, b) || __notnull());
+      result = __lowerTypedArray(Float64Array, 181, 3, result) || __notnull();
       try {
         exports.arrayAdd(a, b, result);
       } finally {
@@ -469,8 +362,8 @@ async function instantiate(module, imports = {}) {
     },
     dotProduct(a, b) {
       // assembly/core/math-operations/dotProduct(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => f64
-      a = __retain(__lowerTypedArray(Float64Array, 135, 3, a) || __notnull());
-      b = __lowerTypedArray(Float64Array, 135, 3, b) || __notnull();
+      a = __retain(__lowerTypedArray(Float64Array, 181, 3, a) || __notnull());
+      b = __lowerTypedArray(Float64Array, 181, 3, b) || __notnull();
       try {
         return exports.dotProduct(a, b);
       } finally {
@@ -479,13 +372,13 @@ async function instantiate(module, imports = {}) {
     },
     vectorMagnitude(v) {
       // assembly/core/math-operations/vectorMagnitude(~lib/typedarray/Float64Array) => f64
-      v = __lowerTypedArray(Float64Array, 135, 3, v) || __notnull();
+      v = __lowerTypedArray(Float64Array, 181, 3, v) || __notnull();
       return exports.vectorMagnitude(v);
     },
     normalizeVector(v, result) {
       // assembly/core/math-operations/normalizeVector(~lib/typedarray/Float64Array, ~lib/typedarray/Float64Array) => void
-      v = __retain(__lowerTypedArray(Float64Array, 135, 3, v) || __notnull());
-      result = __lowerTypedArray(Float64Array, 135, 3, result) || __notnull();
+      v = __retain(__lowerTypedArray(Float64Array, 181, 3, v) || __notnull());
+      result = __lowerTypedArray(Float64Array, 181, 3, result) || __notnull();
       try {
         exports.normalizeVector(v, result);
       } finally {
@@ -573,119 +466,6 @@ async function instantiate(module, imports = {}) {
       // assembly/core/math-primes/previousPrime(u64) => u64
       n = n || 0n;
       return BigInt.asUintN(64, exports.previousPrime(n));
-    },
-    SHA256_H: {
-      // assembly/core/constants/SHA256_H: ~lib/array/Array<u32>
-      valueOf() { return this.value; },
-      get value() {
-        return __liftArray(pointer => __getU32(pointer) >>> 0, 2, exports.SHA256_H.value >>> 0);
-      }
-    },
-    SHA256_K: {
-      // assembly/core/constants/SHA256_K: ~lib/array/Array<u32>
-      valueOf() { return this.value; },
-      get value() {
-        return __liftArray(pointer => __getU32(pointer) >>> 0, 2, exports.SHA256_K.value >>> 0);
-      }
-    },
-    DEFAULT_PRNG_SEED: {
-      // assembly/core/constants/DEFAULT_PRNG_SEED: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.DEFAULT_PRNG_SEED.value);
-      }
-    },
-    LCG_MULTIPLIER: {
-      // assembly/core/constants/LCG_MULTIPLIER: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.LCG_MULTIPLIER.value);
-      }
-    },
-    LCG_INCREMENT: {
-      // assembly/core/constants/LCG_INCREMENT: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.LCG_INCREMENT.value);
-      }
-    },
-    MERSENNE_PRIME_31: {
-      // assembly/core/constants/MERSENNE_PRIME_31: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.MERSENNE_PRIME_31.value);
-      }
-    },
-    FIELD_GENERATOR: {
-      // assembly/core/constants/FIELD_GENERATOR: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.FIELD_GENERATOR.value);
-      }
-    },
-    MAX_ACTIVE_ROUNDS: {
-      // assembly/core/constants/MAX_ACTIVE_ROUNDS: u32
-      valueOf() { return this.value; },
-      get value() {
-        return exports.MAX_ACTIVE_ROUNDS.value >>> 0;
-      }
-    },
-    DEFAULT_CHECKPOINT_INTERVAL: {
-      // assembly/core/constants/DEFAULT_CHECKPOINT_INTERVAL: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.DEFAULT_CHECKPOINT_INTERVAL.value);
-      }
-    },
-    MAX_CHECKPOINTS: {
-      // assembly/core/constants/MAX_CHECKPOINTS: u32
-      valueOf() { return this.value; },
-      get value() {
-        return exports.MAX_CHECKPOINTS.value >>> 0;
-      }
-    },
-    OPTIMIZATION_INTERVAL: {
-      // assembly/core/constants/OPTIMIZATION_INTERVAL: u64
-      valueOf() { return this.value; },
-      get value() {
-        return BigInt.asUintN(64, exports.OPTIMIZATION_INTERVAL.value);
-      }
-    },
-    NetworkError: (values => (
-      // assembly/core/constants/NetworkError
-      values[values.NODE_NOT_FOUND = exports["NetworkError.NODE_NOT_FOUND"].valueOf()] = "NODE_NOT_FOUND",
-      values[values.NODE_ALREADY_EXISTS = exports["NetworkError.NODE_ALREADY_EXISTS"].valueOf()] = "NODE_ALREADY_EXISTS",
-      values[values.ENTANGLEMENT_FAILED = exports["NetworkError.ENTANGLEMENT_FAILED"].valueOf()] = "ENTANGLEMENT_FAILED",
-      values[values.LOW_COHERENCE = exports["NetworkError.LOW_COHERENCE"].valueOf()] = "LOW_COHERENCE",
-      values[values.NOT_ENTANGLED = exports["NetworkError.NOT_ENTANGLED"].valueOf()] = "NOT_ENTANGLED",
-      values[values.MEMORY_FULL = exports["NetworkError.MEMORY_FULL"].valueOf()] = "MEMORY_FULL",
-      values[values.NETWORK_UNSTABLE = exports["NetworkError.NETWORK_UNSTABLE"].valueOf()] = "NETWORK_UNSTABLE",
-      values[values.INVALID_PRIME = exports["NetworkError.INVALID_PRIME"].valueOf()] = "INVALID_PRIME",
-      values[values.SYNCHRONIZATION_FAILED = exports["NetworkError.SYNCHRONIZATION_FAILED"].valueOf()] = "SYNCHRONIZATION_FAILED",
-      values
-    ))({}),
-    ProtocolError: (values => (
-      // assembly/core/constants/ProtocolError
-      values[values.TIMEOUT = exports["ProtocolError.TIMEOUT"].valueOf()] = "TIMEOUT",
-      values[values.INVALID_MESSAGE = exports["ProtocolError.INVALID_MESSAGE"].valueOf()] = "INVALID_MESSAGE",
-      values[values.NOT_ENTANGLED = exports["ProtocolError.NOT_ENTANGLED"].valueOf()] = "NOT_ENTANGLED",
-      values[values.LOW_COHERENCE = exports["ProtocolError.LOW_COHERENCE"].valueOf()] = "LOW_COHERENCE",
-      values[values.ROUTE_NOT_FOUND = exports["ProtocolError.ROUTE_NOT_FOUND"].valueOf()] = "ROUTE_NOT_FOUND",
-      values[values.SYNC_FAILED = exports["ProtocolError.SYNC_FAILED"].valueOf()] = "SYNC_FAILED",
-      values[values.FIDELITY_TOO_LOW = exports["ProtocolError.FIDELITY_TOO_LOW"].valueOf()] = "FIDELITY_TOO_LOW",
-      values[values.MESSAGE_TOO_LARGE = exports["ProtocolError.MESSAGE_TOO_LARGE"].valueOf()] = "MESSAGE_TOO_LARGE",
-      values[values.SIGNATURE_INVALID = exports["ProtocolError.SIGNATURE_INVALID"].valueOf()] = "SIGNATURE_INVALID",
-      values
-    ))({}),
-    generateUniqueId(prefix) {
-      // assembly/core/constants/generateUniqueId(~lib/string/String) => ~lib/string/String
-      prefix = __lowerString(prefix) || __notnull();
-      return __liftString(exports.generateUniqueId(prefix) >>> 0);
-    },
-    approxEqual(a, b, epsilon) {
-      // assembly/core/constants/approxEqual(f64, f64, f64?) => bool
-      exports.__setArgumentsLength(arguments.length);
-      return exports.approxEqual(a, b, epsilon) != 0;
     },
     IdentityType: (values => (
       // assembly/identity/interfaces/IdentityType
@@ -887,6 +667,42 @@ async function instantiate(module, imports = {}) {
         return __liftInternref(exports.globalAuthManager.value >>> 0);
       }
     },
+    ControlFlowType: (values => (
+      // assembly/runtime/execution/controlFlow/ControlFlowType
+      values[values.SEQUENTIAL = exports["ControlFlowType.SEQUENTIAL"].valueOf()] = "SEQUENTIAL",
+      values[values.CONDITIONAL = exports["ControlFlowType.CONDITIONAL"].valueOf()] = "CONDITIONAL",
+      values[values.LOOP = exports["ControlFlowType.LOOP"].valueOf()] = "LOOP",
+      values[values.JUMP = exports["ControlFlowType.JUMP"].valueOf()] = "JUMP",
+      values[values.CALL = exports["ControlFlowType.CALL"].valueOf()] = "CALL",
+      values[values.RETURN = exports["ControlFlowType.RETURN"].valueOf()] = "RETURN",
+      values[values.BREAK = exports["ControlFlowType.BREAK"].valueOf()] = "BREAK",
+      values[values.CONTINUE = exports["ControlFlowType.CONTINUE"].valueOf()] = "CONTINUE",
+      values[values.HALT = exports["ControlFlowType.HALT"].valueOf()] = "HALT",
+      values
+    ))({}),
+    BasisType: (values => (
+      // assembly/runtime/state/primeState/BasisType
+      values[values.PRIME = exports["BasisType.PRIME"].valueOf()] = "PRIME",
+      values[values.FOURIER = exports["BasisType.FOURIER"].valueOf()] = "FOURIER",
+      values[values.WAVELET = exports["BasisType.WAVELET"].valueOf()] = "WAVELET",
+      values[values.POLYNOMIAL = exports["BasisType.POLYNOMIAL"].valueOf()] = "POLYNOMIAL",
+      values[values.MODULAR = exports["BasisType.MODULAR"].valueOf()] = "MODULAR",
+      values
+    ))({}),
+    RegisterType: (values => (
+      // assembly/runtime/state/registerState/RegisterType
+      values[values.GENERAL = exports["RegisterType.GENERAL"].valueOf()] = "GENERAL",
+      values[values.COHERENCE = exports["RegisterType.COHERENCE"].valueOf()] = "COHERENCE",
+      values[values.AMPLITUDE = exports["RegisterType.AMPLITUDE"].valueOf()] = "AMPLITUDE",
+      values[values.PHASE = exports["RegisterType.PHASE"].valueOf()] = "PHASE",
+      values[values.ENTROPY = exports["RegisterType.ENTROPY"].valueOf()] = "ENTROPY",
+      values[values.PROBABILITY = exports["RegisterType.PROBABILITY"].valueOf()] = "PROBABILITY",
+      values[values.SUCCESS = exports["RegisterType.SUCCESS"].valueOf()] = "SUCCESS",
+      values[values.RESONANCE = exports["RegisterType.RESONANCE"].valueOf()] = "RESONANCE",
+      values[values.COUNT = exports["RegisterType.COUNT"].valueOf()] = "COUNT",
+      values[values.RANDOM = exports["RegisterType.RANDOM"].valueOf()] = "RANDOM",
+      values
+    ))({}),
   }, exports);
   function __liftString(pointer) {
     if (!pointer) return null;
@@ -1039,9 +855,6 @@ export const {
   currentNode,
   setCurrentNode,
   PI,
-  ProtocolType,
-  NetworkError,
-  ProtocolError,
   tensor,
   collapse,
   rotatePhase,
@@ -1053,18 +866,7 @@ export const {
   teleport,
   entangled,
   observe,
-  PHI,
-  DELTA_S,
-  primeOperator,
-  factorizationOperator,
-  rotationOperator,
-  coherenceOperator,
-  primeSpectrum,
-  symbolicCollapse,
   transmitQuaternionicMessage,
-  superpose,
-  measure,
-  collapse,
   entropyRate,
   align,
   generateSymbol,
@@ -1074,12 +876,6 @@ export const {
   getGlobalTracker,
   exportEntropyData,
   exportEntropyHistory,
-  escapeJSON,
-  toFixed,
-  serializeString,
-  serializeNumber,
-  serializeBoolean,
-  serializeInteger,
   validateString,
   validateNumber,
   validateObject,
@@ -1130,68 +926,6 @@ export const {
   sieveOfEratosthenes,
   nextPrime,
   previousPrime,
-  PHI,
-  E,
-  PI,
-  TWO_PI,
-  SHA256_H,
-  SHA256_K,
-  HMAC_IPAD,
-  HMAC_OPAD,
-  SHA256_BLOCK_SIZE,
-  SHA256_OUTPUT_SIZE,
-  DEFAULT_PRNG_SEED,
-  LCG_MULTIPLIER,
-  LCG_INCREMENT,
-  LCG_MODULUS,
-  MERSENNE_PRIME_31,
-  FIELD_GENERATOR,
-  MILLER_RABIN_ITERATIONS,
-  DEFAULT_PRIME_MIN_BITS,
-  DEFAULT_PRIME_MAX_BITS,
-  MIN_ENTANGLEMENT_STRENGTH,
-  MAX_MESSAGE_SIZE,
-  DEFAULT_PROTOCOL_TIMEOUT,
-  DEFAULT_CONSENSUS_THRESHOLD,
-  MAX_ACTIVE_ROUNDS,
-  DEFAULT_CACHE_TIMEOUT,
-  DEFAULT_SYNC_INTERVAL,
-  DEFAULT_PHASE_TOLERANCE,
-  MAX_FRAGMENTS_PER_NODE,
-  DEFAULT_DHT_TTL,
-  DEFAULT_CHECKPOINT_INTERVAL,
-  MAX_CHECKPOINTS,
-  BELL_PAIR_MAX_AGE,
-  KEYTRIPLET_PRIME_COUNT,
-  KEYTRIPLET_NOISE_SCALE,
-  DEFAULT_PBKDF2_ITERATIONS,
-  DEFAULT_PBKDF2_KEY_LENGTH,
-  OPTIMIZATION_INTERVAL,
-  MIN_OPTIMIZATION_ENTANGLEMENT,
-  MAX_OPTIMIZATION_ENTANGLEMENT,
-  ENTANGLEMENT_STEP,
-  PATTERN_DECAY_RATE,
-  LOAD_BALANCE_WEIGHT,
-  DEFAULT_LEARNING_RATE,
-  DEFAULT_OPTIMIZATION_ITERATIONS,
-  DEFAULT_MONITORING_INTERVAL,
-  DEFAULT_HISTORY_SIZE,
-  NODE_HEALTH_TIMEOUT,
-  NODE_STALE_TIMEOUT,
-  CRITICAL_ERROR_THRESHOLD,
-  POOR_COHERENCE_THRESHOLD,
-  DEFAULT_MAX_ERROR_RATE,
-  DEFAULT_MAX_LATENCY_P99,
-  MAX_ENTROPY_HISTORY,
-  GRADIENT_STEP_SIZE,
-  NetworkError,
-  ProtocolError,
-  generateUniqueId,
-  degreesToRadians,
-  radiansToDegrees,
-  clamp,
-  lerp,
-  approxEqual,
   exampleUsage,
   IdentityType,
   KYCLevel,
@@ -1215,6 +949,9 @@ export const {
   AuthMethod,
   SessionStatus,
   globalAuthManager,
+  ControlFlowType,
+  BasisType,
+  RegisterType,
 } = await (async url => instantiate(
   await (async () => {
     const isNodeOrBun = typeof process != "undefined" && process.versions != null && (process.versions.node != null || process.versions.bun != null);

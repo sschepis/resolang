@@ -22,59 +22,6 @@ export declare const PI: {
   /** @type `f64` */
   get value(): number
 };
-/** assembly/types/ProtocolType */
-export declare enum ProtocolType {
-  /** @type `i32` */
-  EIP,
-  /** @type `i32` */
-  MTP,
-  /** @type `i32` */
-  RRP,
-  /** @type `i32` */
-  PSP,
-}
-/** assembly/types/NetworkError */
-export declare enum NetworkError {
-  /** @type `i32` */
-  NODE_NOT_FOUND,
-  /** @type `i32` */
-  NODE_ALREADY_EXISTS,
-  /** @type `i32` */
-  ENTANGLEMENT_FAILED,
-  /** @type `i32` */
-  LOW_COHERENCE,
-  /** @type `i32` */
-  NOT_ENTANGLED,
-  /** @type `i32` */
-  MEMORY_FULL,
-  /** @type `i32` */
-  NETWORK_UNSTABLE,
-  /** @type `i32` */
-  INVALID_PRIME,
-  /** @type `i32` */
-  SYNCHRONIZATION_FAILED,
-}
-/** assembly/types/ProtocolError */
-export declare enum ProtocolError {
-  /** @type `i32` */
-  TIMEOUT,
-  /** @type `i32` */
-  INVALID_MESSAGE,
-  /** @type `i32` */
-  NOT_ENTANGLED,
-  /** @type `i32` */
-  LOW_COHERENCE,
-  /** @type `i32` */
-  ROUTE_NOT_FOUND,
-  /** @type `i32` */
-  SYNC_FAILED,
-  /** @type `i32` */
-  FIDELITY_TOO_LOW,
-  /** @type `i32` */
-  MESSAGE_TOO_LARGE,
-  /** @type `i32` */
-  SIGNATURE_INVALID,
-}
 /**
  * assembly/operators/tensor
  * @param fragmentA `assembly/resonlang/ResonantFragment`
@@ -146,57 +93,6 @@ export declare function entangled(nodeA: __Internref4, nodeB: __Internref4): boo
  * @returns `~lib/array/Array<f64>`
  */
 export declare function observe(remote: __Internref4): Array<number>;
-/** assembly/prime-resonance/PHI */
-export declare const PHI: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/prime-resonance/DELTA_S */
-export declare const DELTA_S: {
-  /** @type `f64` */
-  get value(): number
-};
-/**
- * assembly/prime-resonance/primeOperator
- * @param state `assembly/prime-resonance/PrimeState`
- * @returns `~lib/map/Map<i32,f64>`
- */
-export declare function primeOperator(state: __Internref127): __Internref11;
-/**
- * assembly/prime-resonance/factorizationOperator
- * @param n `u32`
- * @returns `assembly/prime-resonance/PrimeState`
- */
-export declare function factorizationOperator(n: number): __Internref127;
-/**
- * assembly/prime-resonance/rotationOperator
- * @param n `u32`
- * @param p `i32`
- * @returns `f64`
- */
-export declare function rotationOperator(n: number, p: number): number;
-/**
- * assembly/prime-resonance/coherenceOperator
- * @param state `assembly/prime-resonance/PrimeState`
- * @param n `u32`
- * @returns `f64`
- */
-export declare function coherenceOperator(state: __Internref127, n: number): number;
-/**
- * assembly/prime-resonance/primeSpectrum
- * @param state `assembly/prime-resonance/PrimeState`
- * @returns `~lib/map/Map<i32,f64>`
- */
-export declare function primeSpectrum(state: __Internref127): __Internref11;
-/**
- * assembly/prime-resonance/symbolicCollapse
- * @param initialStates `~lib/array/Array<assembly/prime-resonance/PrimeState>`
- * @param coefficients `~lib/array/Array<f64>`
- * @param maxIterations `i32`
- * @param entropyThreshold `f64`
- * @returns `assembly/prime-resonance/PrimeState`
- */
-export declare function symbolicCollapse(initialStates: Array<__Internref127>, coefficients: Array<number>, maxIterations?: number, entropyThreshold?: number): __Internref127;
 /**
  * assembly/quaternion-entanglement/transmitQuaternionicMessage
  * @param sender `assembly/quaternion-entanglement/QuaternionicAgent`
@@ -205,26 +101,7 @@ export declare function symbolicCollapse(initialStates: Array<__Internref127>, c
  * @param synchronizer `assembly/quaternion-entanglement/QuaternionicSynchronizer`
  * @returns `bool`
  */
-export declare function transmitQuaternionicMessage(sender: __Internref131, receiver: __Internref131, message: string, synchronizer: __Internref138): boolean;
-/**
- * assembly/quantum-ops-impl/superpose
- * @param states `~lib/array/Array<assembly/prime-resonance/PrimeState>`
- * @returns `assembly/prime-resonance/PrimeState`
- */
-export declare function superpose(states: Array<__Internref127>): __Internref127;
-/**
- * assembly/quantum-ops-impl/measure
- * @param state `assembly/prime-resonance/PrimeState`
- * @returns `u32`
- */
-export declare function measure(state: __Internref127): number;
-/**
- * assembly/quantum-ops-impl/collapse
- * @param state `assembly/prime-resonance/PrimeState`
- * @param prime `u32`
- * @returns `assembly/prime-resonance/PrimeState`
- */
-export declare function collapse(state: __Internref127, prime: number): __Internref127;
+export declare function transmitQuaternionicMessage(sender: __Internref177, receiver: __Internref177, message: string, synchronizer: __Internref184): boolean;
 /**
  * assembly/utils/entropyRate
  * @param phaseRing `~lib/array/Array<f64>`
@@ -275,57 +152,20 @@ export declare function exportEntropyData(): string;
  */
 export declare function exportEntropyHistory(): string;
 /**
- * assembly/core/serialization/escapeJSON
- * @param str `~lib/string/String`
- * @returns `~lib/string/String`
- */
-export declare function escapeJSON(str: string): string;
-/**
- * assembly/core/serialization/toFixed
- * @param value `f64`
- * @param decimals `i32`
- * @returns `~lib/string/String`
- */
-export declare function toFixed(value: number, decimals: number): string;
-/**
- * assembly/core/serialization/serializeString
- * @param value `~lib/string/String`
- * @returns `~lib/string/String`
- */
-export declare function serializeString(value: string): string;
-/**
- * assembly/core/serialization/serializeNumber
- * @param value `f64`
- * @returns `~lib/string/String`
- */
-export declare function serializeNumber(value: number): string;
-/**
- * assembly/core/serialization/serializeBoolean
- * @param value `bool`
- * @returns `~lib/string/String`
- */
-export declare function serializeBoolean(value: boolean): string;
-/**
- * assembly/core/serialization/serializeInteger
- * @param value `i64`
- * @returns `~lib/string/String`
- */
-export declare function serializeInteger(value: bigint): string;
-/**
  * assembly/core/validation/validateString
  * @returns `assembly/core/validation/StringValidationBuilder`
  */
-export declare function validateString(): __Internref141;
+export declare function validateString(): __Internref187;
 /**
  * assembly/core/validation/validateNumber
  * @returns `assembly/core/validation/NumberValidationBuilder`
  */
-export declare function validateNumber(): __Internref145;
+export declare function validateNumber(): __Internref191;
 /**
  * assembly/core/validation/validateObject
  * @returns `assembly/core/validation/ObjectValidator`
  */
-export declare function validateObject(): __Internref149;
+export declare function validateObject(): __Internref195;
 /**
  * assembly/core/math-optimized/modExpOptimized
  * @param base `u64`
@@ -407,7 +247,7 @@ export declare const primeCache: {
  * @param b `i64`
  * @returns `assembly/core/math-extended-gcd/ExtendedGCDResult`
  */
-export declare function extendedGCD(a: bigint, b: bigint): __Internref152;
+export declare function extendedGCD(a: bigint, b: bigint): __Internref198;
 /**
  * assembly/core/math-extended-gcd/modInverse
  * @param a `u64`
@@ -575,7 +415,7 @@ export declare const globalMathProfiler: {
  * @param name `~lib/string/String`
  * @param operation `() => void`
  */
-export declare function profileMathOperation(name: string, operation: __Internref169): void;
+export declare function profileMathOperation(name: string, operation: __Internref215): void;
 /** assembly/core/math-performance/globalMathMemoryTracker */
 export declare const globalMathMemoryTracker: {
   /** @type `assembly/core/math-performance/MathMemoryTracker` */
@@ -625,360 +465,6 @@ export declare function nextPrime(n: bigint): bigint;
  * @returns `u64`
  */
 export declare function previousPrime(n: bigint): bigint;
-/** assembly/core/constants/PHI */
-export declare const PHI: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/E */
-export declare const E: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/PI */
-export declare const PI: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/TWO_PI */
-export declare const TWO_PI: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/SHA256_H */
-export declare const SHA256_H: {
-  /** @type `~lib/array/Array<u32>` */
-  get value(): Array<number>
-};
-/** assembly/core/constants/SHA256_K */
-export declare const SHA256_K: {
-  /** @type `~lib/array/Array<u32>` */
-  get value(): Array<number>
-};
-/** assembly/core/constants/HMAC_IPAD */
-export declare const HMAC_IPAD: {
-  /** @type `u8` */
-  get value(): number
-};
-/** assembly/core/constants/HMAC_OPAD */
-export declare const HMAC_OPAD: {
-  /** @type `u8` */
-  get value(): number
-};
-/** assembly/core/constants/SHA256_BLOCK_SIZE */
-export declare const SHA256_BLOCK_SIZE: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/SHA256_OUTPUT_SIZE */
-export declare const SHA256_OUTPUT_SIZE: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PRNG_SEED */
-export declare const DEFAULT_PRNG_SEED: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/LCG_MULTIPLIER */
-export declare const LCG_MULTIPLIER: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/LCG_INCREMENT */
-export declare const LCG_INCREMENT: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/LCG_MODULUS */
-export declare const LCG_MODULUS: {
-  /** @type `i64` */
-  get value(): bigint
-};
-/** assembly/core/constants/MERSENNE_PRIME_31 */
-export declare const MERSENNE_PRIME_31: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/FIELD_GENERATOR */
-export declare const FIELD_GENERATOR: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/MILLER_RABIN_ITERATIONS */
-export declare const MILLER_RABIN_ITERATIONS: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PRIME_MIN_BITS */
-export declare const DEFAULT_PRIME_MIN_BITS: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PRIME_MAX_BITS */
-export declare const DEFAULT_PRIME_MAX_BITS: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/MIN_ENTANGLEMENT_STRENGTH */
-export declare const MIN_ENTANGLEMENT_STRENGTH: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/MAX_MESSAGE_SIZE */
-export declare const MAX_MESSAGE_SIZE: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PROTOCOL_TIMEOUT */
-export declare const DEFAULT_PROTOCOL_TIMEOUT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_CONSENSUS_THRESHOLD */
-export declare const DEFAULT_CONSENSUS_THRESHOLD: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/MAX_ACTIVE_ROUNDS */
-export declare const MAX_ACTIVE_ROUNDS: {
-  /** @type `u32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_CACHE_TIMEOUT */
-export declare const DEFAULT_CACHE_TIMEOUT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_SYNC_INTERVAL */
-export declare const DEFAULT_SYNC_INTERVAL: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PHASE_TOLERANCE */
-export declare const DEFAULT_PHASE_TOLERANCE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/MAX_FRAGMENTS_PER_NODE */
-export declare const MAX_FRAGMENTS_PER_NODE: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_DHT_TTL */
-export declare const DEFAULT_DHT_TTL: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_CHECKPOINT_INTERVAL */
-export declare const DEFAULT_CHECKPOINT_INTERVAL: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/MAX_CHECKPOINTS */
-export declare const MAX_CHECKPOINTS: {
-  /** @type `u32` */
-  get value(): number
-};
-/** assembly/core/constants/BELL_PAIR_MAX_AGE */
-export declare const BELL_PAIR_MAX_AGE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/KEYTRIPLET_PRIME_COUNT */
-export declare const KEYTRIPLET_PRIME_COUNT: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/KEYTRIPLET_NOISE_SCALE */
-export declare const KEYTRIPLET_NOISE_SCALE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PBKDF2_ITERATIONS */
-export declare const DEFAULT_PBKDF2_ITERATIONS: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_PBKDF2_KEY_LENGTH */
-export declare const DEFAULT_PBKDF2_KEY_LENGTH: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/OPTIMIZATION_INTERVAL */
-export declare const OPTIMIZATION_INTERVAL: {
-  /** @type `u64` */
-  get value(): bigint
-};
-/** assembly/core/constants/MIN_OPTIMIZATION_ENTANGLEMENT */
-export declare const MIN_OPTIMIZATION_ENTANGLEMENT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/MAX_OPTIMIZATION_ENTANGLEMENT */
-export declare const MAX_OPTIMIZATION_ENTANGLEMENT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/ENTANGLEMENT_STEP */
-export declare const ENTANGLEMENT_STEP: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/PATTERN_DECAY_RATE */
-export declare const PATTERN_DECAY_RATE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/LOAD_BALANCE_WEIGHT */
-export declare const LOAD_BALANCE_WEIGHT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_LEARNING_RATE */
-export declare const DEFAULT_LEARNING_RATE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_OPTIMIZATION_ITERATIONS */
-export declare const DEFAULT_OPTIMIZATION_ITERATIONS: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_MONITORING_INTERVAL */
-export declare const DEFAULT_MONITORING_INTERVAL: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_HISTORY_SIZE */
-export declare const DEFAULT_HISTORY_SIZE: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/NODE_HEALTH_TIMEOUT */
-export declare const NODE_HEALTH_TIMEOUT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/NODE_STALE_TIMEOUT */
-export declare const NODE_STALE_TIMEOUT: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/CRITICAL_ERROR_THRESHOLD */
-export declare const CRITICAL_ERROR_THRESHOLD: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/POOR_COHERENCE_THRESHOLD */
-export declare const POOR_COHERENCE_THRESHOLD: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_MAX_ERROR_RATE */
-export declare const DEFAULT_MAX_ERROR_RATE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/DEFAULT_MAX_LATENCY_P99 */
-export declare const DEFAULT_MAX_LATENCY_P99: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/MAX_ENTROPY_HISTORY */
-export declare const MAX_ENTROPY_HISTORY: {
-  /** @type `i32` */
-  get value(): number
-};
-/** assembly/core/constants/GRADIENT_STEP_SIZE */
-export declare const GRADIENT_STEP_SIZE: {
-  /** @type `f64` */
-  get value(): number
-};
-/** assembly/core/constants/NetworkError */
-export declare enum NetworkError {
-  /** @type `i32` */
-  NODE_NOT_FOUND,
-  /** @type `i32` */
-  NODE_ALREADY_EXISTS,
-  /** @type `i32` */
-  ENTANGLEMENT_FAILED,
-  /** @type `i32` */
-  LOW_COHERENCE,
-  /** @type `i32` */
-  NOT_ENTANGLED,
-  /** @type `i32` */
-  MEMORY_FULL,
-  /** @type `i32` */
-  NETWORK_UNSTABLE,
-  /** @type `i32` */
-  INVALID_PRIME,
-  /** @type `i32` */
-  SYNCHRONIZATION_FAILED,
-}
-/** assembly/core/constants/ProtocolError */
-export declare enum ProtocolError {
-  /** @type `i32` */
-  TIMEOUT,
-  /** @type `i32` */
-  INVALID_MESSAGE,
-  /** @type `i32` */
-  NOT_ENTANGLED,
-  /** @type `i32` */
-  LOW_COHERENCE,
-  /** @type `i32` */
-  ROUTE_NOT_FOUND,
-  /** @type `i32` */
-  SYNC_FAILED,
-  /** @type `i32` */
-  FIDELITY_TOO_LOW,
-  /** @type `i32` */
-  MESSAGE_TOO_LARGE,
-  /** @type `i32` */
-  SIGNATURE_INVALID,
-}
-/**
- * assembly/core/constants/generateUniqueId
- * @param prefix `~lib/string/String`
- * @returns `~lib/string/String`
- */
-export declare function generateUniqueId(prefix: string): string;
-/**
- * assembly/core/constants/degreesToRadians
- * @param degrees `f64`
- * @returns `f64`
- */
-export declare function degreesToRadians(degrees: number): number;
-/**
- * assembly/core/constants/radiansToDegrees
- * @param radians `f64`
- * @returns `f64`
- */
-export declare function radiansToDegrees(radians: number): number;
-/**
- * assembly/core/constants/clamp
- * @param value `f64`
- * @param min `f64`
- * @param max `f64`
- * @returns `f64`
- */
-export declare function clamp(value: number, min: number, max: number): number;
-/**
- * assembly/core/constants/lerp
- * @param a `f64`
- * @param b `f64`
- * @param t `f64`
- * @returns `f64`
- */
-export declare function lerp(a: number, b: number, t: number): number;
-/**
- * assembly/core/constants/approxEqual
- * @param a `f64`
- * @param b `f64`
- * @param epsilon `f64`
- * @returns `bool`
- */
-export declare function approxEqual(a: number, b: number, epsilon?: number): boolean;
 /**
  * assembly/identity/index/exampleUsage
  */
@@ -1249,6 +735,63 @@ export declare const globalAuthManager: {
   /** @type `assembly/identity/authentication/AuthenticationManager` */
   get value(): __Internref116
 };
+/** assembly/runtime/execution/controlFlow/ControlFlowType */
+export declare enum ControlFlowType {
+  /** @type `i32` */
+  SEQUENTIAL,
+  /** @type `i32` */
+  CONDITIONAL,
+  /** @type `i32` */
+  LOOP,
+  /** @type `i32` */
+  JUMP,
+  /** @type `i32` */
+  CALL,
+  /** @type `i32` */
+  RETURN,
+  /** @type `i32` */
+  BREAK,
+  /** @type `i32` */
+  CONTINUE,
+  /** @type `i32` */
+  HALT,
+}
+/** assembly/runtime/state/primeState/BasisType */
+export declare enum BasisType {
+  /** @type `i32` */
+  PRIME,
+  /** @type `i32` */
+  FOURIER,
+  /** @type `i32` */
+  WAVELET,
+  /** @type `i32` */
+  POLYNOMIAL,
+  /** @type `i32` */
+  MODULAR,
+}
+/** assembly/runtime/state/registerState/RegisterType */
+export declare enum RegisterType {
+  /** @type `i32` */
+  GENERAL,
+  /** @type `i32` */
+  COHERENCE,
+  /** @type `i32` */
+  AMPLITUDE,
+  /** @type `i32` */
+  PHASE,
+  /** @type `i32` */
+  ENTROPY,
+  /** @type `i32` */
+  PROBABILITY,
+  /** @type `i32` */
+  SUCCESS,
+  /** @type `i32` */
+  RESONANCE,
+  /** @type `i32` */
+  COUNT,
+  /** @type `i32` */
+  RANDOM,
+}
 /** assembly/resonlang/EntangledNode */
 declare class __Internref4 extends Number {
   private __nominal4: symbol;
@@ -1259,24 +802,14 @@ declare class __Internref85 extends Number {
   private __nominal85: symbol;
   private __nominal0: symbol;
 }
-/** assembly/prime-resonance/PrimeState */
-declare class __Internref127 extends Number {
-  private __nominal127: symbol;
-  private __nominal0: symbol;
-}
-/** ~lib/map/Map<i32,f64> */
-declare class __Internref11 extends Number {
-  private __nominal11: symbol;
-  private __nominal0: symbol;
-}
 /** assembly/quaternion-entanglement/QuaternionicAgent */
-declare class __Internref131 extends Number {
-  private __nominal131: symbol;
+declare class __Internref177 extends Number {
+  private __nominal177: symbol;
   private __nominal0: symbol;
 }
 /** assembly/quaternion-entanglement/QuaternionicSynchronizer */
-declare class __Internref138 extends Number {
-  private __nominal138: symbol;
+declare class __Internref184 extends Number {
+  private __nominal184: symbol;
   private __nominal0: symbol;
 }
 /** assembly/entropy-viz/EntropyFieldSampler */
@@ -1290,20 +823,20 @@ declare class __Internref12 extends Number {
   private __nominal0: symbol;
 }
 /** assembly/core/validation/StringValidationBuilder */
-declare class __Internref141 extends Number {
-  private __nominal141: symbol;
-  private __nominal142: symbol;
+declare class __Internref187 extends Number {
+  private __nominal187: symbol;
+  private __nominal188: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/validation/NumberValidationBuilder */
-declare class __Internref145 extends Number {
-  private __nominal145: symbol;
-  private __nominal146: symbol;
+declare class __Internref191 extends Number {
+  private __nominal191: symbol;
+  private __nominal192: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/validation/ObjectValidator */
-declare class __Internref149 extends Number {
-  private __nominal149: symbol;
+declare class __Internref195 extends Number {
+  private __nominal195: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/math-cache/PrimeCache */
@@ -1312,8 +845,8 @@ declare class __Internref29 extends Number {
   private __nominal0: symbol;
 }
 /** assembly/core/math-extended-gcd/ExtendedGCDResult */
-declare class __Internref152 extends Number {
-  private __nominal152: symbol;
+declare class __Internref198 extends Number {
+  private __nominal198: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/math-performance/MathProfiler */
@@ -1322,8 +855,8 @@ declare class __Internref54 extends Number {
   private __nominal0: symbol;
 }
 /** ~lib/function/Function<%28%29=>void> */
-declare class __Internref169 extends Number {
-  private __nominal169: symbol;
+declare class __Internref215 extends Number {
+  private __nominal215: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/math-performance/MathMemoryTracker */

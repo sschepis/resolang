@@ -1,5 +1,5 @@
 import { ResonantFragment, EntangledNode } from './resonlang';
-import { PrimeState } from './prime-resonance';
+import { PrimeState } from './quantum/prime-state';
 import { Quaternion, QuaternionicResonanceField } from './quaternion';
 
 // Data structure for entropy field visualization

@@ -5,7 +5,7 @@
 
 import { Quaternion, QuaternionicResonanceField, TwistDynamics, QuaternionicProjector } from './quaternion';
 import { Prime, Entropy } from './resonlang';
-import { PrimeState } from './prime-resonance';
+import { PrimeState } from './quantum/prime-state';
 
 /**
  * Represents an entangled pair of quaternions for non-local communication

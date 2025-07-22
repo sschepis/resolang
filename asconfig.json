@@ -10,7 +10,8 @@
       "outFile": "build/resolang.wasm",
       "textFile": "build/resolang.wat",
       "sourceMap": false,
-      "optimize": true
+      "optimize": true,
+      "declarationFile": "build/resolang.d.ts"
     }
   },
   "options": {

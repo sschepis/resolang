@@ -2,7 +2,7 @@
 // Implementation of Prime-Resonant Keytriplets for secure non-local communication
 // Based on "Prime-Resonant Keytriplets and Symbolic Field Evolution for Non-Local Communication"
 
-import { PrimeState } from "../prime-resonance";
+import { PrimeState } from '../quantum/prime-state';
 import { Prime, Complex, Amplitude } from "../types";
 import { sha256, randomBytes } from "../core/crypto";
 import { generatePrimes, isPrime } from "../core/math";

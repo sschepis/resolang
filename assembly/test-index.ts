@@ -6,6 +6,7 @@
 // Import test modules that have minimal dependencies
 import { runAllTests as runMathTests } from "./tests/core-math.test";
 import { runAllTests as runCryptoTests } from "./tests/core-crypto.test";
+import { runAllTests as runEngineTests } from "./tests/engine.test";
 
 // Main test runner
 export function runAllTests(): void {
@@ -22,6 +23,11 @@ export function runAllTests(): void {
   console.log("Running Crypto Tests...");
   runCryptoTests();
   console.log("✅ Crypto tests completed\n");
+
+  // Run engine tests
+  console.log("Running Engine Tests...");
+  runEngineTests();
+  console.log("✅ Engine tests completed\n");
   
   // Summary
   console.log("=== Test Summary ===");

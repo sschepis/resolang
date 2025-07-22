@@ -75,6 +75,13 @@ export class Complex implements Serializable {
       (this.imag * other.real - this.real * other.imag) / denominator
     );
   }
+
+  /**
+   * Alias for divide
+   */
+  div(other: Complex): Complex {
+    return this.divide(other);
+  }
   
   /**
    * Scale by a real number
@@ -98,6 +105,17 @@ export class Complex implements Serializable {
    */
   magnitude(): f64 {
     return Math.sqrt(this.real * this.real + this.imag * this.imag);
+  }
+
+  magnitudeSquared(): f64 {
+    return this.real * this.real + this.imag * this.imag;
+  }
+
+  /**
+   * Alias for magnitude()
+   */
+  abs(): f64 {
+    return this.magnitude();
   }
   
   /**
@@ -143,6 +161,17 @@ export class Complex implements Serializable {
    */
   clone(): Complex {
     return new Complex(this.real, this.imag);
+  }
+
+  /**
+   * Complex exponential
+   */
+  exp(): Complex {
+    const e_real = Math.exp(this.real);
+    return new Complex(
+      e_real * Math.cos(this.imag),
+      e_real * Math.sin(this.imag)
+    );
   }
 }
 

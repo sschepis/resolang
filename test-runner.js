@@ -36,6 +36,9 @@ async function runTests() {
         seed: () => {
           return Date.now();
         },
+        "Date.now": () => {
+          return Date.now();
+        },
         "console.log": (msgPtr) => {
           if (wasmExports) {
             const msg = wasmExports.__getString(msgPtr);

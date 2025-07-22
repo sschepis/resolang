@@ -1,8 +1,15 @@
 {
   "name": "@sschepis/resolang",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "build/resolang.js",
+  "types": "build/resolang.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/resolang.js",
+      "types": "./build/resolang.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sschepis/resolang.git"
@@ -15,14 +22,15 @@
     "asbuild:debug": "asc assembly/index.ts --target debug",
     "asbuild:release": "asc assembly/index.ts --target release",
     "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "build": "asc assembly/index.ts --target release --outFile build/resolang.wasm",
-    "build:runtime": "asc assembly/index.ts --target release --outFile build/resolang.wasm",
+    "build": "asc assembly/index.ts --target release -o build/resolang.wasm -b build/resolang.js --sourceMap --exportRuntime",
+    "build:runtime": "asc assembly/index.ts --target release -o build/resolang.wasm",
     "build:all": "npm run build && npm run build:tests",
-    "build:tests": "asc assembly/test-index.ts --target release --outFile build/test-core.wasm",
+    "build:tests": "asc assembly/test-index.ts --target release -o build/test-core.wasm",
     "start": "node run.js",
     "test": "node test-runner.js",
     "test:wasm": "node test-runner.js build/test-core.wasm",
-    "test:build": "npm run build:tests && npm run test:wasm"
+    "test:build": "npm run build:tests && npm run test:wasm",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "resolang",
@@ -34,17 +42,18 @@
   "license": "ISC",
   "description": "ResoLang - Core quantum resonance computation library",
   "devDependencies": {
+    "@as-pect/cli": "^8.1.0",
     "assemblyscript": "^0.27.37"
   },
   "dependencies": {
     "@assemblyscript/loader": "^0.27.37",
     "ws": "^8.16.0"
   },
-  "types": "build/resolang.d.ts",
   "files": [
-    "build/",
-    "assembly/",
-    "README.md",
-    "LICENSE"
+    "build/resolang.js",
+    "build/resolang.d.ts",
+    "build/resolang.wasm",
+    "build/resolang.wasm.map",
+    "README.md"
   ]
 }

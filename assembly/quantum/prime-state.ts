@@ -48,8 +48,10 @@ export class PrimeState {
       state.primes[i] = primes[i]; 
     }
     state.coefficients = new Array<Complex>(primes.length);
+    // Initialize coefficients with default values or based on a convention (e.g., equal superposition)
     for (let i = 0; i < primes.length; i++) {
-      state.coefficients[i] = new Complex(0, 0);
+        // Example: initialize with equal amplitude and zero phase
+        state.coefficients[i] = new Complex(1.0 / Math.sqrt(f64(primes.length)), 0.0);
     }
     state.syncMapFromArrays();
     state.normalize();
@@ -67,7 +69,8 @@ export class PrimeState {
       const prime = keys[i];
       this.primes.push(prime);
       const amp = this.amplitudes.get(prime);
-      this.coefficients.push(new Complex(amp, 0));
+      // Assuming amplitudes map stores magnitude, not complex value
+      this.coefficients.push(new Complex(amp, 0)); // Assuming phase is zero initially for map sync
     }
   }
   
@@ -117,32 +120,35 @@ export class PrimeState {
    * (Simplified, actual coherence calculation is more complex)
    */
   calculateCoherence(): f64 {
-    // This is a placeholder; actual coherence involves complex phase alignments
     if (this.primes.length === 0) return 0.0;
     
     let sumAmplitude = 0.0;
     for (let i = 0; i < this.coefficients.length; i++) {
       sumAmplitude += this.coefficients[i].magnitude();
     }
-    return sumAmplitude / f64(this.coefficients.length); // Average amplitude as a coherence proxy
+    return sumAmplitude / f64(this.coefficients.length);
   }
 
   /**
    * Evolve amplitudes based on a simple entropy model.
    * This is a CPU-side fallback/initial evolution.
    */
+  // Note: This method's parameter `evolutionRate` might need to be reconciled
+  // with how `UnifiedQuantumState`'s `evolve` method calculates/passes evolution rate.
   evolveWithEntropy(evolutionRate: f64): void {
       for (let i = 0; i < this.coefficients.length; i++) {
           let current_amp = this.coefficients[i].magnitude();
-          let new_amp_val = current_amp * (1.0 + evolutionRate * 0.001); // Simple growth
+          let new_amp_val = current_amp * (1.0 + evolutionRate * 0.001);
+          new_amp_val = Math.max(0.0, Math.min(new_amp_val, 1.0)); // Clamp between 0 and 1
           this.amplitudes.set(this.primes[i], new_amp_val);
-          this.coefficients[i] = new Complex(new_amp_val, 0); // Update coefficient magnitude
+          this.coefficients[i] = new Complex(new_amp_val, 0); // Update magnitude
       }
       this.normalize();
   }
  
   /**
-   * Get prime values as a Uint32Array for GPU
+   * Get prime values as a Uint32Array for GPU consumption.
+   * Useful for passing prime identifiers to GPU kernels.
    */
   getPrimeValuesAsUint32Array(): Uint32Array {
       const arr = new Uint32Array(this.primes.length);
@@ -153,79 +159,91 @@ export class PrimeState {
   }
 
   /**
-   * Get amplitudes as a Float32Array for GPU (magnitude)
+   * Get complex amplitudes (real and imaginary parts interleaved) as a Float32Array for GPU.
+   * Format: [real0, imag0, real1, imag1, ...]
    */
   getAmplitudesAsFloat32Array(): Float32Array {
-      const arr = new Float32Array(this.coefficients.length);
+      const arr = new Float32Array(this.coefficients.length * 2); // Real and Imaginary parts
       for (let i = 0; i < this.coefficients.length; i++) {
-          arr[i] = f32(this.coefficients[i].magnitude());
+          arr[i * 2] = f32(this.coefficients[i].real);
+          arr[i * 2 + 1] = f32(this.coefficients[i].imag);
       }
       return arr;
   }
 
   /**
-   * Get coherence factors as Float32Array (placeholder, combine amplitude and phase coherence)
+   * Get coherence factors for each prime as a Float32Array.
+   * This might be a simplified representation of each prime's individual coherence.
    */
   getCoherenceFactorsAsFloat32Array(): Float32Array {
       const arr = new Float32Array(this.coefficients.length);
       for (let i = 0; i < this.coefficients.length; i++) {
-          // Simplified coherence factor for each prime, could be more complex
-          // Combining magnitude and a dummy phase measure
-          arr[i] = f32(this.coefficients[i].magnitude() * (1.0 + Math.sin(this.coefficients[i].phase())));
+          // Placeholder for actual complex coherence factor. For now, use magnitude or a simple derivation.
+          // This should ideally come from a specific coherence property of QuantumPrime or a calculation.
+          arr[i] = f32(this.coefficients[i].magnitude()); // Or a more complex coherence value if available per prime
       }
       return arr;
   }
 
   /**
-   * Update amplitudes and global coherence from a Float32Array (from GPU results)
+   * Update internal complex amplitudes and prime amplitudes map from a Float32Array returned by GPU.
+   * Assumes interleaved real and imaginary components: [real0, imag0, real1, imag1, ...]
    */
   updateAmplitudesFromFloat32Array(evolvedAmplitudes: Float32Array): void {
-      for (let i = 0; i < this.coefficients.length; i++) {
-          let new_amp = evolvedAmplitudes[i];
-          this.amplitudes.set(this.primes[i], new_amp);
-          // Assuming phase is handled separately or not returned by GPU, keep original phase
-          this.coefficients[i] = new Complex(new_amp, 0); // Update magnitude, keep 0 imag for simplicity
+      if (evolvedAmplitudes.length !== this.coefficients.length * 2) {
+          // This indicates a mismatch, ideally throw an error or log a warning
+          // For now, trace and return to prevent out-of-bounds access
+          trace("Error: Mismatch in evolvedAmplitudes array length for update.");
+          return;
       }
-      this.syncMapFromArrays(); // Keep map updated
-      this.normalize(); // Re-normalize after update
+      for (let i = 0; i < this.coefficients.length; i++) {
+          const real = f64(evolvedAmplitudes[i * 2]);
+          const imag = f64(evolvedAmplitudes[i * 2 + 1]);
+          const newComplex = new Complex(real, imag);
+
+          this.coefficients[i] = newComplex;
+          this.amplitudes.set(this.primes[i], newComplex.magnitude()); // Update map with new magnitude
+      }
+      this.syncMapFromArrays(); // Ensure map is fully synchronized after array update
+      this.normalize(); // Re-normalize after update as magnitudes might have changed
   }
   
   /**
    * Ensures Σ|αp|² = 1 (normalization condition)
    */
   normalize(): void {
-    // Determine the sum of squared magnitudes
     let sumSquared: f64 = 0.0;
     if (this.coefficients.length > 0) {
       for (let i = 0; i < this.coefficients.length; i++) {
         sumSquared += this.coefficients[i].squaredMagnitude();
       }
-    } else {
+    } else if (this.amplitudes.size > 0) { // Check size for map to avoid iteration over empty map
       const keys = this.amplitudes.keys();
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const amp = this.amplitudes.get(key);
         sumSquared += amp * amp;
       }
+    } else {
+        return; // Nothing to normalize if empty
     }
 
     if (sumSquared > 0.0) {
       const normFactor = 1.0 / Math.sqrt(sumSquared);
 
-      // Apply normalization factor
       if (this.coefficients.length > 0) {
         for (let i = 0; i < this.coefficients.length; i++) {
           this.coefficients[i].real *= normFactor;
           this.coefficients[i].imag *= normFactor;
         }
-        this.syncMapFromArrays(); // Sync map after array normalization
-      } else {
+        this.syncMapFromArrays();
+      } else { // Fallback for when only amplitudes map is populated directly
         const keys = this.amplitudes.keys();
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i];
           this.amplitudes.set(key, this.amplitudes.get(key) * normFactor);
         }
-        this.syncArraysFromMap(); // Sync arrays after map normalization
+        this.syncArraysFromMap();
       }
     }
   }
@@ -237,15 +255,13 @@ export class PrimeState {
     let entropy: f64 = 0.0;
     
     if (this.coefficients.length > 0) {
-      // Use array representation
       for (let i = 0; i < this.coefficients.length; i++) {
         const prob = this.coefficients[i].magnitude() * this.coefficients[i].magnitude();
         if (prob > 0) {
           entropy -= prob * Math.log2(prob);
         }
       }
-    } else {
-      // Use map representation
+    } else if (this.amplitudes.size > 0) {
       const keys = this.amplitudes.keys();
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
@@ -266,14 +282,12 @@ export class PrimeState {
    * Get phase of a specific prime component
    */
   phase(prime: Prime): f64 {
-    // Check array representation first
     for (let i = 0; i < this.primes.length; i++) {
       if (this.primes[i] === prime) {
         return this.coefficients[i].phase();
       }
     }
     
-    // Fall back to map (real amplitudes have phase 0)
     if (this.amplitudes.has(prime)) {
       return 0.0;
     }
@@ -302,7 +316,6 @@ export class PrimeState {
     let cumProb: f64 = 0.0;
     
     if (this.coefficients.length > 0) {
-      // Use array representation
       for (let i = 0; i < this.primes.length; i++) {
         const prob = this.coefficients[i].magnitude() * this.coefficients[i].magnitude();
         cumProb += prob;
@@ -310,10 +323,8 @@ export class PrimeState {
           return this.primes[i];
         }
       }
-      // Fallback to last prime
-      return this.primes[this.primes.length - 1];
-    } else {
-      // Use map representation
+      return this.primes.length > 0 ? this.primes[this.primes.length - 1] : 2; // Fallback to last prime or 2
+    } else if (this.amplitudes.size > 0) {
       const keys = this.amplitudes.keys();
       for (let i = 0; i < keys.length; i++) {
         const prime = keys[i];
@@ -326,9 +337,9 @@ export class PrimeState {
           }
         }
       }
-      // Fallback to first prime
-      return keys.length > 0 ? keys[0] : 2;
+      return keys.length > 0 ? keys[0] : 2; // Fallback to first prime or 2
     }
+    return 2; // Default if state is empty
   }
   
   /**

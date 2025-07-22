@@ -24,6 +24,10 @@ async function instantiate(module, imports = {}) {
           return Date.now() * Math.random();
         })();
       },
+      "Date.now"() {
+        // ~lib/bindings/dom/Date.now() => f64
+        return Date.now();
+      },
     }),
   };
   const { exports } = await WebAssembly.instantiate(module, adaptedImports);
