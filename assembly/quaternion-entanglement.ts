@@ -4,7 +4,7 @@
  */
 
 import { Quaternion, QuaternionicResonanceField, TwistDynamics, QuaternionicProjector } from './quaternion';
-import { Prime, Entropy } from './resonlang';
+import { Prime, Entropy } from './resolang';
 import { PrimeState } from './quantum/prime-state';
 
 /**

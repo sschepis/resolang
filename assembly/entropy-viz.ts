@@ -1,4 +1,4 @@
-import { ResonantFragment, EntangledNode } from './resonlang';
+import { ResonantFragment, EntangledNode } from './resolang';
 import { PrimeState } from './quantum/prime-state';
 import { Quaternion, QuaternionicResonanceField } from './quaternion';
 
@@ -7,16 +7,16 @@ export class EntropyFieldData {
   timestamp: f64;
   fragmentEntropies: Map<string, f64>;
   nodeCoherences: Map<string, f64>;
-  primeAmplitudes: Map<i32, f64>;
-  quaternionPhases: Map<i32, f64>;
+  primeAmplitudes: Map<u32, f64>;
+  quaternionPhases: Map<u32, f64>;
   fieldIntensities: Array<f64>;
   
   constructor() {
     this.timestamp = 0;
     this.fragmentEntropies = new Map<string, f64>();
     this.nodeCoherences = new Map<string, f64>();
-    this.primeAmplitudes = new Map<i32, f64>();
-    this.quaternionPhases = new Map<i32, f64>();
+    this.primeAmplitudes = new Map<u32, f64>();
+    this.quaternionPhases = new Map<u32, f64>();
     this.fieldIntensities = new Array<f64>();
   }
 }
@@ -25,12 +25,16 @@ export class EntropyFieldData {
 export class EntropyFieldSampler {
   data: EntropyFieldData;
   private sampleRate: f64;
-  private gridSize: i32;
+  private _gridSize: i32; // Renamed to avoid conflict with getter
   
   constructor(sampleRate: f64 = 0.1, gridSize: i32 = 50) {
     this.data = new EntropyFieldData();
     this.sampleRate = sampleRate;
-    this.gridSize = gridSize;
+    this._gridSize = gridSize;
+  }
+
+  get gridSize(): i32 {
+    return this._gridSize;
   }
   
   // Sample entropy from a ResonantFragment
@@ -55,7 +59,7 @@ export class EntropyFieldSampler {
   }
   
   // Sample phase from a Quaternion
-  sampleQuaternion(q: Quaternion, prime: i32): void {
+  sampleQuaternion(q: Quaternion, prime: u32): void {
     const phase = Math.atan2(Math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z), q.w);
     this.data.quaternionPhases.set(prime, phase);
   }
@@ -156,6 +160,10 @@ export class EntropyEvolutionTracker {
     this.maxHistory = maxHistory;
     this.sampler = new EntropyFieldSampler();
   }
+
+  getHistory(): Array<EntropyFieldData> {
+    return this.history;
+  }
   
   // Record current state
   recordState(
@@ -210,8 +218,8 @@ export class EntropyEvolutionTracker {
     resolution: i32 = 20
   ): Array<Array<f64>> {
     const criticalPoints = new Array<Array<f64>>();
-    const dx = (xMax - xMin) / f64(resolution);
-    const dy = (yMax - yMin) / f64(resolution);
+    const dx = (xMax - xMin) / f64(resolution - 1);
+    const dy = (yMax - yMin) / f64(resolution - 1);
     
     for (let j = 1; j < resolution - 1; j++) {
       for (let i = 1; i < resolution - 1; i++) {
@@ -219,7 +227,7 @@ export class EntropyEvolutionTracker {
         const y = yMin + j * dy;
         
         const grad = this.getEntropyGradient(x, y, field);
-        if (Math.abs(grad[0]) < 0.01 && Math.abs(grad[1]) < 0.01) {
+        if (Math.abs(grad[0]) < 0.15 && Math.abs(grad[1]) < 0.15) {
           criticalPoints.push([x, y, field(x, y)]);
         }
       }
@@ -244,31 +252,31 @@ export class EntropyEvolutionTracker {
 // Global sampler instance for easy access
 let globalSampler: EntropyFieldSampler | null = null;
 let globalTracker: EntropyEvolutionTracker | null = null;
-
+ 
 export function initializeEntropyViz(): void {
   globalSampler = new EntropyFieldSampler();
   globalTracker = new EntropyEvolutionTracker();
 }
-
+ 
 export function getGlobalSampler(): EntropyFieldSampler {
   if (!globalSampler) {
     initializeEntropyViz();
   }
   return globalSampler!;
 }
-
+ 
 export function getGlobalTracker(): EntropyEvolutionTracker {
   if (!globalTracker) {
     initializeEntropyViz();
   }
   return globalTracker!;
 }
-
+ 
 // Export function for WebAssembly
 export function exportEntropyData(): string {
   return getGlobalSampler().exportData();
 }
-
+ 
 export function exportEntropyHistory(): string {
   return getGlobalTracker().exportHistory();
 }

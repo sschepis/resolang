@@ -132,49 +132,49 @@ export type SessionID = string;
  * Type for route type
  */
 export enum RouteType {
-  DIRECT = "direct",
-  MULTI_HOP = "multi_hop",
-  BROADCAST = "broadcast"
+  DIRECT,
+  MULTI_HOP,
+  BROADCAST
 }
 
 /**
  * Type for network status
  */
 export enum NetworkStatus {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  DEGRADED = "degraded",
-  UNKNOWN = "unknown"
+  ACTIVE,
+  INACTIVE,
+  DEGRADED,
+  UNKNOWN
 }
 
 /**
  * Type for protocol status
  */
 export enum ProtocolStatus {
-  INITIALIZED = "initialized",
-  IN_PROGRESS = "in_progress",
-  COMPLETED = "completed",
-  FAILED = "failed"
+  INITIALIZED,
+  IN_PROGRESS,
+  COMPLETED,
+  FAILED
 }
 
 /**
  * Type for sync method
  */
 export enum SyncMethod {
-  QUANTUM_TELEPORTATION = "quantum_teleportation",
-  COHERENCE_BASED = "coherence_based",
-  HOLOGRAPHIC_PROJECTION = "holographic_projection",
-  RESONANCE_WAVE = "resonance_wave"
+  QUANTUM_TELEPORTATION,
+  COHERENCE_BASED,
+  HOLOGRAPHIC_PROJECTION,
+  RESONANCE_WAVE
 }
 
 /**
  * Type for alert severity
  */
 export enum AlertSeverity {
-  INFO = "info",
-  WARNING = "warning",
-  ERROR = "error",
-  CRITICAL = "critical"
+  INFO,
+  WARNING,
+  ERROR,
+  CRITICAL
 }
 
 /**

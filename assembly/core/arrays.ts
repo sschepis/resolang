@@ -4,6 +4,7 @@
  */
 
 import { ValidationException } from "./errors";
+import { Tuple } from "./tuples";
 
 /**
  * Creates a new array with specified type and optional initial capacity
@@ -168,7 +169,7 @@ export function count<T>(arr: Array<T>, predicate: (value: T) => bool): i32 {
 /**
  * Partitions an array into two arrays based on a predicate
  */
-export function partition<T>(arr: Array<T>, predicate: (value: T) => bool): [Array<T>, Array<T>] {
+export function partition<T>(arr: Array<T>, predicate: (value: T) => bool): Tuple<Array<T>, Array<T>> {
   const truthy = new Array<T>();
   const falsy = new Array<T>();
   
@@ -180,7 +181,7 @@ export function partition<T>(arr: Array<T>, predicate: (value: T) => bool): [Arr
     }
   }
   
-  return [truthy, falsy];
+  return new Tuple(truthy, falsy);
 }
 
 /**
@@ -208,12 +209,12 @@ export function range(start: i32, end: i32, step: i32 = 1): Array<i32> {
 /**
  * Zips multiple arrays together
  */
-export function zip<T, U>(arr1: Array<T>, arr2: Array<U>): Array<[T, U]> {
+export function zip<T, U>(arr1: Array<T>, arr2: Array<U>): Array<Tuple<T, U>> {
   const minLength = min(arr1.length, arr2.length);
-  const result = new Array<[T, U]>();
+  const result = new Array<Tuple<T, U>>();
   
   for (let i = 0; i < minLength; i++) {
-    result.push([arr1[i], arr2[i]]);
+    result.push(new Tuple(arr1[i], arr2[i]));
   }
   
   return result;

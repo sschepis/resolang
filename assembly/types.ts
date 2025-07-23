@@ -3,8 +3,9 @@
 
 import { Serializable } from "./core/interfaces";
 import { JSONBuilder } from "./core/serialization";
+import { toFixed } from "./utils";
 
-export type Prime = i32;
+export type Prime = u32;
 export type Phase = f64;
 export type Amplitude = f64;
 export type Entropy = f64;
@@ -136,10 +137,12 @@ export class Complex implements Serializable {
    * String representation
    */
   toString(): string {
+    const realStr = toFixed(this.real, 4); // Limit to 4 decimal places
+    const imagStr = toFixed(this.imag, 4); // Limit to 4 decimal places
     if (this.imag >= 0) {
-      return `${this.real}+${this.imag}i`;
+      return `${realStr}+${imagStr}i`;
     } else {
-      return `${this.real}${this.imag}i`;
+      return `${realStr}${imagStr}i`;
     }
   }
   

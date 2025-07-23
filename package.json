@@ -28,6 +28,7 @@
     "build:tests": "asc assembly/test-index.ts --target release -o build/test-core.wasm",
     "start": "node run.js",
     "test": "node test-runner.js",
+    "test:cov": "kcov --include-pattern=assembly --exclude-pattern=assembly/tests --wasm build/resolang.wasm npm run test",
     "test:wasm": "node test-runner.js build/test-core.wasm",
     "test:build": "npm run build:tests && npm run test:wasm",
     "prepublishOnly": "npm run build"
@@ -47,6 +48,7 @@
   },
   "dependencies": {
     "@assemblyscript/loader": "^0.27.37",
+    "assemblyscript-json": "^1.1.0",
     "ws": "^8.16.0"
   },
   "files": [

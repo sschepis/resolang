@@ -10,7 +10,7 @@ import {
     Phase,
     Amplitude,
     Entropy
-} from './resonlang';
+} from './resolang';
 import { ExtendedExecutionContext } from './runtime/execution/context';
 import { GlobalState } from './runtime/state/globalState';
 import { PrimeStateEngine } from './runtime/state/primeState';

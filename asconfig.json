@@ -19,7 +19,7 @@
     "runtime": "incremental",
     "exportRuntime": true,
     "importMemory": false,
-    "initialMemory": 2,
+    "initialMemory": 3,
     "maximumMemory": 16,
     "zeroFilledMemory": true,
     "memoryBase": 0,

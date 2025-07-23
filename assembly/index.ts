@@ -2,7 +2,7 @@
 // This file exports all public APIs that ResonNet and other projects can use
 
 // Core types and classes
-export * from './resonlang';
+export * from './resolang';
 
 // Core operations
 export * from './operators';

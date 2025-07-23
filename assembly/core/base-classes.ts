@@ -801,6 +801,20 @@ export abstract class BasePlugin implements Plugin {
   isInitialized(): bool {
     return this._initialized && !this._disposed;
   }
+
+  /**
+   * Check if started
+   */
+  isStarted(): bool {
+    return this._started;
+  }
+
+  /**
+   * Check if disposed
+   */
+  isDisposed(): bool {
+    return this._disposed;
+  }
   
   /**
    * Set plugin context

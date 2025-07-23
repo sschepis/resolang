@@ -456,6 +456,11 @@ export class ErrorManager {
   private strategies: Array<RecoveryStrategy> = [];
   private errorLog: Array<ErrorDetails> = [];
   private maxLogSize: i32 = 1000;
+
+  // Public method to clear strategies for testing
+  clearStrategies(): void {
+    this.strategies = [];
+  }
   
   private constructor() {
     // Initialize default strategies

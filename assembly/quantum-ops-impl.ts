@@ -2,7 +2,7 @@
  * Implementation of quantum operations for PRN
  */
 
-import { PrimeState } from './prime-resonance';
+import { PrimeState } from './quantum/prime-state';
 
 // Superpose multiple prime states
 export function superpose(states: Array<PrimeState>): PrimeState {
@@ -78,16 +78,9 @@ export function measure(state: PrimeState): u32 {
 export function collapse(state: PrimeState, prime: u32): PrimeState {
   const collapsed = new PrimeState();
   
-  // Set amplitude to 1 for measured prime, 0 for others
-  const primes = state.amplitudes.keys();
-  for (let i = 0; i < primes.length; i++) {
-    const p = primes[i];
-    if (p === prime) {
-      collapsed.amplitudes.set(p, 1.0);
-    } else {
-      collapsed.amplitudes.set(p, 0.0);
-    }
-  }
+  // Clear all amplitudes and set only the measured prime to 1.0
+  collapsed.amplitudes.clear();
+  collapsed.amplitudes.set(prime, 1.0);
   
   return collapsed;
 }

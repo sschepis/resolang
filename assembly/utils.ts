@@ -1,7 +1,7 @@
 // utils.ts
 // This file contains various utility functions used by the ResoLang implementation.
 
-import { Phase } from "./resonlang";
+import { Phase } from "./resolang";
 
 /**
  * Calculates a conceptual "entropy rate" for a given phase ring.
@@ -70,6 +70,9 @@ export function generateSymbol(primes: Array<u32>): string {
  * @returns A string representation of the number with fixed decimal places
  */
 export function toFixed(value: f64, decimals: i32 = 2): string {
+    if (decimals < 0) decimals = 0;
+    
+    // Use math approach instead of string manipulation to avoid complexity
     const multiplier = Math.pow(10, decimals);
     const rounded = Math.round(value * multiplier) / multiplier;
     
@@ -85,12 +88,19 @@ export function toFixed(value: f64, decimals: i32 = 2): string {
         dotIndex = str.length - 1;
     }
     
-    // Add zeros to reach desired decimal places
+    // Calculate current decimal places
     const currentDecimals = str.length - dotIndex - 1;
-    for (let i = currentDecimals; i < decimals; i++) {
-        str += "0";
+    
+    // Add or remove decimal places as needed
+    if (currentDecimals < decimals) {
+        // Add trailing zeros
+        for (let i = currentDecimals; i < decimals; i++) {
+            str += "0";
+        }
+    } else if (currentDecimals > decimals) {
+        // Truncate (should not happen with proper rounding, but just in case)
+        str = str.substring(0, dotIndex + decimals + 1);
     }
     
     return str;
 }
-

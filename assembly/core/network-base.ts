@@ -98,7 +98,7 @@ export abstract class EntanglableNode extends BaseNetworkNode {
   constructor(id: NodeID, maxEntanglements: i32 = 10) {
     super(id);
     this.entanglementMap = new Map<NodeID, EntanglementStrength>();
-    this.maxEntanglements = requirePositive(maxEntanglements, "Max entanglements");
+    this.maxEntanglements = requirePositive(maxEntanglements, "Max entanglements") as i32;
   }
   
   /**

@@ -1,7 +1,7 @@
 // operators.ts
 // This file implements the core operators defined in the ResoLang syntax.
 
-import { ResonantFragment, EntangledNode, Phase, Entropy, Prime, Amplitude, PI } from "./resonlang";
+import { ResonantFragment, EntangledNode, Phase, Entropy, Prime, Amplitude, PI } from "./resolang";
 import { toFixed } from "./utils";
 
 // 3.2 Operators

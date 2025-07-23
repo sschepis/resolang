@@ -3,7 +3,7 @@
  * Leverages PRN's quantum operations for identity management
  */
 
-import { ResonantFragment, Prime, Amplitude, Entropy } from "../resonlang";
+import { ResonantFragment, Prime, Amplitude, Entropy } from "../resolang";
 import { PrimeResonanceIdentity, NetworkNode } from "../prn-node";
 import { IIdentity, IDomain, IDomainObject, IPermission, IRole } from "./interfaces";
 import { IdentityId, DomainId, ObjectId } from "./types";

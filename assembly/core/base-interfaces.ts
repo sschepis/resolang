@@ -117,7 +117,7 @@ export interface Comparable<T> {
 /**
  * Network message interface
  */
-export interface NetworkMessage extends Serializable, Validatable {
+export interface NetworkMessage extends Serializable {
   /**
    * Unique message ID
    */
@@ -197,7 +197,7 @@ export interface ProtocolHandler {
 /**
  * Network node interface
  */
-export interface NetworkNode extends Lifecycle, Observable<NetworkEvent> {
+export interface NetworkNode extends Lifecycle {
   /**
    * Node identifier
    */
@@ -545,13 +545,13 @@ export class PluginMetadata {
  * Plugin capability types
  */
 export enum PluginCapability {
-  PROTOCOL_HANDLER = "protocol_handler",
-  STORAGE_PROVIDER = "storage_provider",
-  CRYPTO_PROVIDER = "crypto_provider",
-  NETWORK_TRANSPORT = "network_transport",
-  COMPUTATION_ENGINE = "computation_engine",
-  MONITORING_PROVIDER = "monitoring_provider",
-  CUSTOM = "custom"
+  PROTOCOL_HANDLER,
+  STORAGE_PROVIDER,
+  CRYPTO_PROVIDER,
+  NETWORK_TRANSPORT,
+  COMPUTATION_ENGINE,
+  MONITORING_PROVIDER,
+  CUSTOM
 }
 
 // ============================================================================

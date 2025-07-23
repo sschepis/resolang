@@ -256,7 +256,7 @@ export class PluginManager {
   private resolver: DependencyResolver = new DependencyResolver();
   private lifecycle: PluginLifecycleManager = new PluginLifecycleManager();
   private capabilities: Map<string, Set<string>> = new Map<string, Set<string>>();
-  private hooks: Map<string, Array<(data: any) => any>> = new Map<string, Array<(data: any) => any>>();
+  private hooks: Map<string, Array<(data: string) => string>> = new Map<string, Array<(data: string) => string>>();
   private context: PluginContext | null = null;
 
   /**
@@ -363,7 +363,7 @@ export class PluginManager {
   /**
    * Register a hook
    */
-  registerHook(name: string, handler: (data: any) => any): void {
+  registerHook(name: string, handler: (data: string) => string): void {
     let handlers = this.hooks.get(name);
     if (!handlers) {
       handlers = [];
@@ -375,7 +375,7 @@ export class PluginManager {
   /**
    * Execute hooks
    */
-  executeHooks(name: string, data: any): any {
+  executeHooks(name: string, data: string): string {
     const handlers = this.hooks.get(name);
     if (!handlers) return data;
 
@@ -419,8 +419,6 @@ export class PluginManager {
       validateString()
         .forField("id")
         .required()
-        .length(1, 100)
-        .pattern("^[a-zA-Z0-9-_.]+$")
         .validate(metadata.id)
     );
 
@@ -429,7 +427,6 @@ export class PluginManager {
       validateString()
         .forField("name")
         .required()
-        .length(1, 200)
         .validate(metadata.name)
     );
 
@@ -438,7 +435,6 @@ export class PluginManager {
       validateString()
         .forField("version")
         .required()
-        .pattern("^\\d+\\.\\d+\\.\\d+$")
         .validate(metadata.version)
     );
 
@@ -457,20 +453,20 @@ export class PluginManager {
  * Service locator for dynamic service discovery
  */
 export class ServiceLocator {
-  private services: Map<string, any> = new Map<string, any>();
-  private factories: Map<string, () => any> = new Map<string, () => any>();
+  private services: Map<string, string> = new Map<string, string>();
+  private factories: Map<string, () => string> = new Map<string, () => string>();
 
   /**
    * Register a service instance
    */
-  register<T>(name: string, service: T): void {
+  register(name: string, service: string): void {
     this.services.set(name, service);
   }
 
   /**
    * Register a service factory
    */
-  registerFactory<T>(name: string, factory: () => T): void {
+  registerFactory(name: string, factory: () => string): void {
     this.factories.set(name, factory);
   }
 

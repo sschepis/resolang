@@ -3,6 +3,8 @@
 
 import { runAllCryptoUtilTests } from "./crypto-utils.test";
 import { runAllKeytripletTests } from "./keytriplet.test";
+import { runAllUtilsTests } from "./utils.test";
+import { runAllFunctionalBlocksTests } from "./functionalBlocks.test";
 
 // Test result tracking
 class TestResult {
@@ -44,6 +46,24 @@ export function runAllTests(): void {
   } catch (e) {
     const error = e instanceof Error ? e.message : "Unknown error";
     results.push(new TestResult("Keytriplet System", false, error));
+  }
+  
+  // Run utils tests
+  try {
+    runAllUtilsTests();
+    results.push(new TestResult("Utilities", true));
+  } catch (e) {
+    const error = e instanceof Error ? e.message : "Unknown error";
+    results.push(new TestResult("Utilities", false, error));
+  }
+  
+  // Run functional blocks tests
+  try {
+    runAllFunctionalBlocksTests();
+    results.push(new TestResult("Functional Blocks", true));
+  } catch (e) {
+    const error = e instanceof Error ? e.message : "Unknown error";
+    results.push(new TestResult("Functional Blocks", false, error));
   }
   
   // Calculate statistics

@@ -1,7 +1,7 @@
 // functionalBlocks.ts
 // This file implements the functional blocks described in the ResoLang specification.
 
-import { EntangledNode, ResonantFragment, setCurrentNode, currentNode, Phase } from "./resonlang";
+import { EntangledNode, ResonantFragment, setCurrentNode, currentNode, Phase } from "./resolang";
 import { coherence } from "./operators"; // Import coherence function
 import { entropyRate as calculateEntropyRate, toFixed } from "./utils"; // Import utility functions
 
