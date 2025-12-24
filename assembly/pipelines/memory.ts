@@ -23,7 +23,7 @@ import { JSONBuilder } from '../core/serialization';
 export class MemoryPipeline extends BasePipeline implements IMemoryCapable {
   private temporal: TemporalLayer = new TemporalLayer(100, 0.01);
   private memory: MemoryStore = new MemoryStore(1000, 0.001);
-  private phaseRing: PhaseLockedRing;
+  private phaseRing!: PhaseLockedRing;
   private primes: Array<u32> = new Array<u32>();
   
   constructor(config: PipelineConfig | null = null) {

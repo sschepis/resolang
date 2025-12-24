@@ -1570,6 +1570,50 @@ async function instantiate(module, imports = {}) {
         __release(keys);
       }
     },
+    PipelineEventType: (values => (
+      // assembly/pipelines/types/PipelineEventType
+      values[values.TICK = exports["PipelineEventType.TICK"].valueOf()] = "TICK",
+      values[values.COLLAPSE = exports["PipelineEventType.COLLAPSE"].valueOf()] = "COLLAPSE",
+      values[values.ENTANGLEMENT = exports["PipelineEventType.ENTANGLEMENT"].valueOf()] = "ENTANGLEMENT",
+      values[values.RESONANCE = exports["PipelineEventType.RESONANCE"].valueOf()] = "RESONANCE",
+      values[values.MEMORY_STORE = exports["PipelineEventType.MEMORY_STORE"].valueOf()] = "MEMORY_STORE",
+      values[values.MEMORY_RECALL = exports["PipelineEventType.MEMORY_RECALL"].valueOf()] = "MEMORY_RECALL",
+      values[values.COHERENCE_CHANGE = exports["PipelineEventType.COHERENCE_CHANGE"].valueOf()] = "COHERENCE_CHANGE",
+      values[values.ENTROPY_CHANGE = exports["PipelineEventType.ENTROPY_CHANGE"].valueOf()] = "ENTROPY_CHANGE",
+      values[values.PHASE_LOCK = exports["PipelineEventType.PHASE_LOCK"].valueOf()] = "PHASE_LOCK",
+      values[values.STATE_CHANGE = exports["PipelineEventType.STATE_CHANGE"].valueOf()] = "STATE_CHANGE",
+      values
+    ))({}),
+    createSemanticPipeline(config) {
+      // assembly/pipelines/semantic/createSemanticPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/semantic/SemanticPipeline
+      config = __lowerRecord300(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createSemanticPipeline(config) >>> 0);
+    },
+    createCognitivePipeline(config) {
+      // assembly/pipelines/cognitive/createCognitivePipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/cognitive/CognitivePipeline
+      config = __lowerRecord300(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createCognitivePipeline(config) >>> 0);
+    },
+    createMemoryPipeline(config) {
+      // assembly/pipelines/memory/createMemoryPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/memory/MemoryPipeline
+      config = __lowerRecord300(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createMemoryPipeline(config) >>> 0);
+    },
+    createEmbeddingPipeline(config) {
+      // assembly/pipelines/embedding/createEmbeddingPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/embedding/EmbeddingPipeline
+      config = __lowerRecord300(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createEmbeddingPipeline(config) >>> 0);
+    },
+    createAgentPipeline(config) {
+      // assembly/pipelines/agent/createAgentPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/agent/AgentPipeline
+      config = __lowerRecord300(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createAgentPipeline(config) >>> 0);
+    },
   }, exports);
   function __liftRecord181(pointer) {
     // assembly/smf/SMFConfig
@@ -1602,6 +1646,25 @@ async function instantiate(module, imports = {}) {
       dampening: __getF64(pointer + 24),
       lyapunovStableThreshold: __getF64(pointer + 32),
     };
+  }
+  function __lowerRecord300(value) {
+    // assembly/pipelines/types/PipelineConfig
+    // Hint: Opt-out from lowering as a record by providing an empty constructor
+    if (value == null) return 0;
+    const pointer = exports.__pin(exports.__new(80, 300));
+    __setU32(pointer + 0, value.numPrimes);
+    __setU32(pointer + 4, value.historyLength);
+    __setF64(pointer + 8, value.defaultDt);
+    __setF64(pointer + 16, value.collapseThreshold);
+    __setF64(pointer + 24, value.coherenceThreshold);
+    __setF64(pointer + 32, value.entanglementThreshold);
+    __setF64(pointer + 40, value.memoryDecayRate);
+    __setF64(pointer + 48, value.entropyDecayRate);
+    __setF64(pointer + 56, value.amplitudeDecayRate);
+    __setF64(pointer + 64, value.kuramotoCoupling);
+    __setF64(pointer + 72, value.resonanceStrength);
+    exports.__unpin(pointer);
+    return pointer;
   }
   function __liftString(pointer) {
     if (!pointer) return null;
@@ -2047,6 +2110,12 @@ export const {
   resonanceScore,
   resonantAttention,
   multiHeadResonantAttention,
+  PipelineEventType,
+  createSemanticPipeline,
+  createCognitivePipeline,
+  createMemoryPipeline,
+  createEmbeddingPipeline,
+  createAgentPipeline,
 } = await (async url => instantiate(
   await (async () => {
     const isNodeOrBun = typeof process != "undefined" && process.versions != null && (process.versions.node != null || process.versions.bun != null);

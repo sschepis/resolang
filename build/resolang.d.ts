@@ -679,7 +679,7 @@ export declare const globalMathProfiler: {
  * @param name `~lib/string/String`
  * @param operation `() => void`
  */
-export declare function profileMathOperation(name: string, operation: __Internref300): void;
+export declare function profileMathOperation(name: string, operation: __Internref319): void;
 /** assembly/core/math-performance/globalMathMemoryTracker */
 export declare const globalMathMemoryTracker: {
   /** @type `assembly/core/math-performance/MathMemoryTracker` */
@@ -1942,6 +1942,59 @@ export declare function resonantAttention(query: __Internref297, keys: Array<__I
  * @returns `assembly/rformer/SparsePrimeState`
  */
 export declare function multiHeadResonantAttention(query: __Internref297, keys: Array<__Internref297>, values: Array<__Internref297>, numHeads?: number, temperature?: number): __Internref297;
+/** assembly/pipelines/types/PipelineEventType */
+export declare enum PipelineEventType {
+  /** @type `i32` */
+  TICK,
+  /** @type `i32` */
+  COLLAPSE,
+  /** @type `i32` */
+  ENTANGLEMENT,
+  /** @type `i32` */
+  RESONANCE,
+  /** @type `i32` */
+  MEMORY_STORE,
+  /** @type `i32` */
+  MEMORY_RECALL,
+  /** @type `i32` */
+  COHERENCE_CHANGE,
+  /** @type `i32` */
+  ENTROPY_CHANGE,
+  /** @type `i32` */
+  PHASE_LOCK,
+  /** @type `i32` */
+  STATE_CHANGE,
+}
+/**
+ * assembly/pipelines/semantic/createSemanticPipeline
+ * @param config `assembly/pipelines/types/PipelineConfig | null`
+ * @returns `assembly/pipelines/semantic/SemanticPipeline`
+ */
+export declare function createSemanticPipeline(config?: __Record300<undefined> | null): __Internref301;
+/**
+ * assembly/pipelines/cognitive/createCognitivePipeline
+ * @param config `assembly/pipelines/types/PipelineConfig | null`
+ * @returns `assembly/pipelines/cognitive/CognitivePipeline`
+ */
+export declare function createCognitivePipeline(config?: __Record300<undefined> | null): __Internref311;
+/**
+ * assembly/pipelines/memory/createMemoryPipeline
+ * @param config `assembly/pipelines/types/PipelineConfig | null`
+ * @returns `assembly/pipelines/memory/MemoryPipeline`
+ */
+export declare function createMemoryPipeline(config?: __Record300<undefined> | null): __Internref313;
+/**
+ * assembly/pipelines/embedding/createEmbeddingPipeline
+ * @param config `assembly/pipelines/types/PipelineConfig | null`
+ * @returns `assembly/pipelines/embedding/EmbeddingPipeline`
+ */
+export declare function createEmbeddingPipeline(config?: __Record300<undefined> | null): __Internref316;
+/**
+ * assembly/pipelines/agent/createAgentPipeline
+ * @param config `assembly/pipelines/types/PipelineConfig | null`
+ * @returns `assembly/pipelines/agent/AgentPipeline`
+ */
+export declare function createAgentPipeline(config?: __Record300<undefined> | null): __Internref318;
 /** assembly/examples/test-comprehensive-benchmark-suite/BenchmarkTestSuite */
 declare class __Internref219 extends Number {
   private __nominal219: symbol;
@@ -2038,8 +2091,8 @@ declare class __Internref55 extends Number {
   private __nominal0: symbol;
 }
 /** ~lib/function/Function<%28%29=>void> */
-declare class __Internref300 extends Number {
-  private __nominal300: symbol;
+declare class __Internref319 extends Number {
+  private __nominal319: symbol;
   private __nominal0: symbol;
 }
 /** assembly/core/math-performance/MathMemoryTracker */
@@ -2237,5 +2290,60 @@ declare class __Internref290 extends Number {
 /** assembly/rformer/SparsePrimeState */
 declare class __Internref297 extends Number {
   private __nominal297: symbol;
+  private __nominal0: symbol;
+}
+/** assembly/pipelines/types/PipelineConfig */
+declare interface __Record300<TOmittable> {
+  /** @type `i32` */
+  numPrimes: number | TOmittable;
+  /** @type `i32` */
+  historyLength: number | TOmittable;
+  /** @type `f64` */
+  defaultDt: number | TOmittable;
+  /** @type `f64` */
+  collapseThreshold: number | TOmittable;
+  /** @type `f64` */
+  coherenceThreshold: number | TOmittable;
+  /** @type `f64` */
+  entanglementThreshold: number | TOmittable;
+  /** @type `f64` */
+  memoryDecayRate: number | TOmittable;
+  /** @type `f64` */
+  entropyDecayRate: number | TOmittable;
+  /** @type `f64` */
+  amplitudeDecayRate: number | TOmittable;
+  /** @type `f64` */
+  kuramotoCoupling: number | TOmittable;
+  /** @type `f64` */
+  resonanceStrength: number | TOmittable;
+}
+/** assembly/pipelines/semantic/SemanticPipeline */
+declare class __Internref301 extends Number {
+  private __nominal301: symbol;
+  private __nominal302: symbol;
+  private __nominal0: symbol;
+}
+/** assembly/pipelines/cognitive/CognitivePipeline */
+declare class __Internref311 extends Number {
+  private __nominal311: symbol;
+  private __nominal302: symbol;
+  private __nominal0: symbol;
+}
+/** assembly/pipelines/memory/MemoryPipeline */
+declare class __Internref313 extends Number {
+  private __nominal313: symbol;
+  private __nominal302: symbol;
+  private __nominal0: symbol;
+}
+/** assembly/pipelines/embedding/EmbeddingPipeline */
+declare class __Internref316 extends Number {
+  private __nominal316: symbol;
+  private __nominal302: symbol;
+  private __nominal0: symbol;
+}
+/** assembly/pipelines/agent/AgentPipeline */
+declare class __Internref318 extends Number {
+  private __nominal318: symbol;
+  private __nominal302: symbol;
   private __nominal0: symbol;
 }

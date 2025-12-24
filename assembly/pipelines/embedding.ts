@@ -24,15 +24,15 @@ const TWO_PI: f64 = 2.0 * PI;
  * - Resonance encoding for stable representations
  */
 export class EmbeddingPipeline extends BasePipeline implements IEmbeddingCapable {
-  private hilbert: PrimeHilbertState;
+  private hilbert!: PrimeHilbertState;
   private evolution: EntropyDrivenEvolution | null = null;
   private primes: Array<u32> = new Array<u32>();
   private embeddingDim: i32 = 16;
-  private referenceState: PrimeHilbertState;
+  private referenceState!: PrimeHilbertState;
   
   constructor(config: PipelineConfig | null = null) {
     super(config);
-    // Initialize with actual config values
+    // Initialize with actual config values after super()
     this.embeddingDim = this.config.numPrimes;
     this.primes = generatePrimes(this.embeddingDim);
     this.hilbert = new PrimeHilbertState(this.primes);
