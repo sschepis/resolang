@@ -1,0 +1,63 @@
+{
+  "name": "@sschepis/resolang",
+  "version": "0.1.2",
+  "type": "module",
+  "main": "build/resolang.js",
+  "types": "build/resolang.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/resolang.js",
+      "types": "./build/resolang.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sschepis/resolang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sschepis/resolang/issues"
+  },
+  "homepage": "https://github.com/sschepis/resolang#readme",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "build": "asc assembly/index.ts --target release -o build/resolang.wasm --bindings esm -b build/resolang.js --sourceMap --exportRuntime",
+    "build:runtime": "asc assembly/index.ts --target release -o build/resolang.wasm",
+    "build:all": "npm run build && npm run build:tests",
+    "build:tests": "asc assembly/test-index.ts --target release -o build/test-core.wasm",
+    "start": "node run.js",
+    "test": "node test/test-runner.js",
+    "test:cov": "kcov --include-pattern=assembly --exclude-pattern=assembly/tests --wasm build/resolang.wasm npm run test",
+    "test:wasm": "node test-runner.js build/test-core.wasm",
+    "test:build": "npm run build:tests && npm run test:wasm",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "resolang",
+    "prime-resonance",
+    "quantum",
+    "network"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "ResoLang - Core quantum resonance computation library",
+  "devDependencies": {
+    "@as-pect/cli": "^8.1.0",
+    "assemblyscript": "^0.27.37"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.27.37",
+    "assemblyscript-json": "^1.1.0",
+    "ts-node": "^10.9.2",
+    "ws": "^8.16.0"
+  },
+  "files": [
+    "build/resolang.js",
+    "build/resolang.d.ts",
+    "build/resolang.wasm",
+    "build/resolang.wasm.map",
+    "assembly/",
+    "README.md"
+  ]
+}

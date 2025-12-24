@@ -1,0 +1,9 @@
+{
+  "extends": "assemblyscript/std/assembly.json",
+  "compilerOptions": {
+    "declaration": true
+  },
+  "include": [
+    "assembly/**/*.ts"
+  ]
+}
