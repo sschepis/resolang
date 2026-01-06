@@ -1,551 +1,441 @@
-# Prime Resonance Network (PRN) and ResoLang
+# ResoLang
 
-**Authors:** Sebastian & Coherent Observer  
-**Date:** January 2025
+[![npm version](https://img.shields.io/npm/v/@sschepis/resolang.svg)](https://www.npmjs.com/package/@sschepis/resolang)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
+**ResoLang** is a quantum-inspired symbolic computing library written in AssemblyScript, compiling to WebAssembly for high-performance execution in both browser and Node.js environments. It implements the Prime Resonance Network (PRN)—a mathematically-defined computing paradigm grounded in prime number theory, phase dynamics, and holographic memory encoding.
 
-## Overview
+## Features
 
-The Prime Resonance Network (PRN) is a quantum-inspired distributed computing infrastructure that implements a mathematically-defined, non-local, symbolic computing and communication network. Built on quantum-inspired prime resonance dynamics, PRN serves as the runtime environment for the ResoLang programming language.
+- **🔢 Prime Resonance Computing** — Computations based on prime number superpositions and resonance dynamics
+- **🌊 Quantum-Inspired Operations** — Tensor products, state collapse, phase modulation, and entanglement simulation
+- **🧠 Sentient Observer Extensions** — Holographic memory fields, entropy-driven collapse, and Sedenion (16D) memory encoding
+- **🔐 Identity Management** — Self-sovereign and managed identity systems with KYC levels and RBAC
+- **⚡ Pipeline Architecture** — Modular pipelines for semantic, cognitive, memory, and agent operations
+- **🔬 Discrete Observer** — Full discrete phase dynamics with Hebbian learning and lockup detection
+- **📐 Hypercomplex Mathematics** — Quaternions, sedenions, Fano planes, and Hilbert space operations
+- **🌐 WebAssembly** — Compiles to WASM for near-native performance in any JavaScript environment
 
-This repository contains:
-- The complete PRN specification and theoretical foundation
-- ResoLang programming language specification
-- AssemblyScript implementation of the PRN infrastructure
-- Network bootstrap services and testing tools
-- **NEW**: Refactored core architecture with optimized performance and extensibility
+## Installation
 
-## Table of Contents
+```bash
+npm install @sschepis/resolang
+```
 
-1. [Prime Resonance Network Specification](#1-prime-resonance-network-specification-prns)
-2. [ResoLang Programming Language](#2-resolang-programming-language)
-3. [Implementation & Infrastructure](#3-implementation--infrastructure)
-4. [Quick Start](#4-quick-start)
-5. [API Reference](#5-api-reference)
-6. [Development Guide](#6-development-guide)
-7. [Architecture & Design Patterns](#7-architecture--design-patterns)
-8. [Performance Optimizations](#8-performance-optimizations)
-9. [Future Extensions](#9-future-extensions)
+## Quick Start
 
----
+### Browser Usage
 
-## 1. Prime Resonance Network Specification (PRNS)
+```javascript
+import { 
+  ResonantFragment, 
+  EntangledNode, 
+  tensor, 
+  collapse,
+  PrimeState
+} from '@sschepis/resolang';
 
-### 1.1 Overview
+// Create a quantum-inspired resonant fragment
+const fragment = ResonantFragment.encode("symbolic pattern");
+console.log(`Entropy: ${fragment.entropy}`);
 
-The Prime Resonance Network (PRN) is a mathematically-defined, non-local, symbolic computing and communication network grounded in quantum-inspired prime resonance dynamics. Each node in a PRN is characterized by a unique prime identity, and all communication and computation occur via symbolic holographic fields encoded in prime-based superpositions.
+// Create entangled nodes with prime identities
+const nodeA = EntangledNode.generateNode(13, 31, 89);
+const nodeB = EntangledNode.generateNode(17, 37, 97);
 
-### 1.2 Core Concepts
+console.log(`Node coherence: ${nodeA.coherence}`);
 
-**Prime Resonance Identity (PRI):**
+// Tensor two fragments
+const fragmentA = ResonantFragment.encode("truth");
+const fragmentB = ResonantFragment.encode("pattern");
+const combined = tensor(fragmentA, fragmentB);
+
+// Collapse to a definite state
+const result = collapse(combined);
+```
+
+### Node.js Usage
+
+```javascript
+import { 
+  createSentientCore,
+  startSentientCore,
+  tickSentientCore,
+  getSentientCoherence,
+  getSentientEntropy
+} from '@sschepis/resolang/node';
+
+// Create and start the sentient observer
+createSentientCore(64);
+startSentientCore(Date.now());
+
+// Run simulation ticks
+for (let i = 0; i < 100; i++) {
+  tickSentientCore(0.016, Date.now());
+}
+
+console.log(`Coherence: ${getSentientCoherence()}`);
+console.log(`Entropy: ${getSentientEntropy()}`);
+```
+
+## Core Concepts
+
+### Prime Resonance Identity (PRI)
+
+Every node in the network is uniquely identified by a triplet of primes from different algebraic domains:
+
 ```
 PRI = (P_G, P_E, P_Q)
 ```
-- `P_G`: Gaussian prime
-- `P_E`: Eisenstein prime
-- `P_Q`: Quaternionic prime
 
-**Entanglement and Coherence:**
-```
-ES(A,B) = f(Φ_A, Φ_B, PRI_A, PRI_B)
-C = |⟨ψ_A | ψ_B⟩|²
-```
+- **P_G**: Gaussian prime (complex integers)
+- **P_E**: Eisenstein prime (Eisenstein integers)  
+- **P_Q**: Quaternionic prime (Hurwitz quaternions)
 
-**Holographic Memory Fields:**
+### Quantum State Representation
+
+States are represented as superpositions over prime bases:
+
 ```
-|ψ_M⟩ = ∑ c_p e^{i φ_p} |p⟩
+|ψ⟩ = Σ αₚ|p⟩  where p ∈ P (set of primes)
 ```
 
-### 1.3 Network Protocols
+```typescript
+import { PrimeState } from '@sschepis/resolang';
 
-- **Entanglement Initialization Protocol (EIP)**
-- **Memory Teleportation Protocol (MTP)**
-- **Resonance Routing Protocol (RRP)**
+// Create a prime state from specific primes
+const state = PrimeState.fromPrimes([2, 3, 5, 7, 11]);
 
-### 1.4 Data Structures
+// Measure the state (probabilistic collapse)
+const measuredPrime = state.measure();
 
-**Node:**
-```json
-{
-  "id": "String",
-  "pri": "PrimeResonanceIdentity",
-  "phaseRing": "PhaseVector[]",
-  "holographicField": "MemoryFragment[]",
-  "entanglementMap": "Map<NodeID, EntanglementStrength>"
+// Calculate entropy
+const entropy = state.entropy();
+```
+
+### Operators
+
+| Operator | Symbol | Description |
+|----------|--------|-------------|
+| Tensor | `⊗` | Field interaction between fragments |
+| Collapse | `⇝` | Observation and entropy lock |
+| Phase Modulation | `⟳` | Phase ring rotation |
+| Entanglement Link | `≡` | Node entanglement based on coherence |
+| Route Selection | `→` | Resonance path routing |
+
+### Holographic Memory
+
+Memory is encoded holographically using prime coefficients:
+
+```
+|ψ_M⟩ = Σ cₚ e^{iφₚ} |p⟩
+```
+
+```typescript
+import { HolographicField, Sedenion } from '@sschepis/resolang';
+
+const field = new HolographicField(256);
+
+// Encode a pattern
+const pattern = new Sedenion(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+const address = new Float64Array([0.1, 0.2, 0.3, 0.4]);
+field.encode(pattern, address);
+
+// Recall from address cue
+const recalled = field.recall(address);
+```
+
+## Module Overview
+
+### Core Types (`assembly/types.ts`)
+
+```typescript
+type Prime = u32;      // Prime number basis
+type Phase = f64;      // Angle in radians
+type Amplitude = f64;  // Magnitude of probability amplitude
+type Entropy = f64;    // Symbolic entropy metric
+```
+
+### ResoLang Primitives (`assembly/resolang.ts`)
+
+- **`ResonantFragment`** — Holographic memory fragment with prime coefficients
+- **`EntangledNode`** — Network node with PRI and phase ring
+- **`TeleportationChannel`** — Quantum-like information transfer channel
+- **`Attractor`** — Symbolic pattern the system resonates toward
+
+### Quantum Module (`assembly/quantum/`)
+
+- **`PrimeState`** — Quantum state over prime Hilbert space
+- **`PhaseLockedRing`** — Phase synchronization mechanism
+- **`PrimeMemory`** — Prime-indexed holographic memory
+- **`QuantumConsciousnessResonance`** — Advanced coherence dynamics
+
+### Identity System (`assembly/identity/`)
+
+```typescript
+import { Identity, IdentityCreationParams, KYCLevel } from '@sschepis/resolang';
+
+// Self-sovereign identity
+const selfSovereign = Identity.createSelfSovereign();
+
+// Managed identity with domain
+const managed = Identity.createManaged(creatorId, domainId);
+
+// Set KYC level
+managed.setKYCLevel(KYCLevel.VERIFIED);
+```
+
+### Pipeline System (`assembly/pipelines/`)
+
+```typescript
+import { 
+  createSemanticPipeline,
+  createCognitivePipeline,
+  createAgentPipeline,
+  createDiscretePipeline
+} from '@sschepis/resolang';
+
+// Create a discrete observer pipeline
+const pipeline = createDiscretePipeline({
+  numOscillators: 21,
+  enablePlasticity: true
+});
+
+// Run pipeline steps
+const result = pipeline.step();
+console.log(`Coherence: ${result.coherence}`);
+```
+
+### Sentient Observer (`assembly/sentient.ts`)
+
+The Sentient Observer integrates multiple subsystems:
+
+- **HolographicField** — Distributed memory using Sedenion rotations
+- **EntanglementDetector** — Mutual information detection between oscillator pairs
+- **EntropyCollapse** — Entropy-driven state collapse mechanism
+- **SentientCore** — Main integration orchestrating all components
+
+```typescript
+import { 
+  SentientCore,
+  createSentientCore,
+  startSentientCore,
+  tickSentientCore
+} from '@sschepis/resolang';
+
+// WASM exports for external use
+createSentientCore(64);  // 64 prime oscillators
+startSentientCore(Date.now());
+
+// Main tick loop
+const momentId = tickSentientCore(0.016, Date.now());
+if (momentId >= 0) {
+  console.log('Significant moment recorded:', momentId);
 }
 ```
 
-**MemoryFragment:**
-```json
-{
-  "id": "String",
-  "coeffs": "Map<Prime, ComplexAmplitude>",
-  "centerX": "Float",
-  "centerY": "Float",
-  "entropyProfile": "Float[]"
-}
+### Discrete Observer (`assembly/discrete-observer.ts`)
+
+Implements the full discrete.pdf specification:
+
+- **Modular Phase Dynamics** — `φ(t+1) = (φ(t) + Δₚ + Coupling) mod M`
+- **Histogram Coherence** — `C_bin = max_b(histogram[b]) / n`
+- **Hebbian Learning** — Strengthens coupling between co-active oscillators
+- **Lockup Detection** — Automatic escape from trapped states
+
+```typescript
+import { 
+  createDiscreteObserver,
+  discreteObserverStep,
+  discreteObserverBoost,
+  discreteObserverGetCoherence
+} from '@sschepis/resolang';
+
+createDiscreteObserver(21);  // 21 primes
+
+// Boost prime at index 5
+discreteObserverBoost(5);
+
+// Step with plasticity enabled
+const tick = discreteObserverStep(1);
+
+console.log(`Coherence: ${discreteObserverGetCoherence()}`);
+console.log(`Tick occurred: ${tick === 1}`);
 ```
 
-### 1.5 Collapse Conditions
-```
-Collapse if ∇S_symbolic(t) < -λ and C(t) > δ
-```
+### Sedenion Memory Field (`assembly/smf.ts`)
 
-### 1.6 Synchronization Layer
-```
-Φ_sync(t) = ∑ e^{i ω_p t} ⋅ PRI_shared
-```
+16-axis semantic space with named axes:
 
-### 1.7 Meta-Operators
+| Index | Axis | Meaning |
+|-------|------|---------|
+| 0 | Coherence | Unity/Integration |
+| 1 | Identity | Self-reference |
+| 2 | Duality | Polarity/Contrast |
+| 3 | Structure | Organization |
+| 4 | Change | Transformation |
+| 5 | Life | Vitality |
+| 6 | Harmony | Balance |
+| 7 | Wisdom | Understanding |
+| 8 | Infinity | Boundlessness |
+| 9 | Creation | Emergence |
+| 10 | Truth | Validity |
+| 11 | Love | Connection |
+| 12 | Power | Capability |
+| 13 | Time | Temporality |
+| 14 | Space | Dimensionality |
+| 15 | Consciousness | Awareness |
 
-- `Π(hash)`: Prime entropy hash function
-- `ℓ(pri)`: Latency from PRI dissonance
-- `ℓ_C(Φ)`: Collapse latency from coherence drift
+```typescript
+import { SedenionMemoryField, createSMFFromText } from '@sschepis/resolang';
 
-### 1.8 Application Layer
-```
-App = ∑ R(n) ⊗ T(φ) ⊗ μ(S)
-```
-
----
-
-## 2. ResoLang Programming Language
-
-### 2.1 Purpose
-
-ResoLang enables symbolic, entangled, and resonance-driven programming over PRNs.
-
-### 2.2 Type System
-
-**Primitive Types:**
-- `Prime`
-- `Phase`
-- `Amplitude`
-- `Entropy`
-
-**Resonant Types:**
-```rust
-ResonantFragment {
-  coeffs: Map<Prime, Amplitude>,
-  center: [Float, Float],
-  entropy: Float
-}
-
-EntangledNode {
-  id: String,
-  pri: (Prime, Prime, Prime),
-  phaseRing: Phase[],
-  coherence: Float
-}
-
-TeleportationChannel {
-  source: EntangledNode,
-  target: EntangledNode,
-  strength: Float,
-  holographicMemory: ResonantFragment
-}
+const smf = createSMFFromText("Hello World");
+console.log(`Coherence axis: ${smf.getAxis(0)}`);
+console.log(`Truth axis: ${smf.getAxis(10)}`);
 ```
 
-### 2.3 Syntax
+### Hypercomplex Math
 
-```resolang
-fragment MemoryA : ResonantFragment = encode("truth pattern");
-node Alpha : EntangledNode = generateNode(13, 31, 89);
-let Psi = MemoryA ⊗ MemoryB;
-let result = Psi ⇝ collapse();
-MemoryA ⟳ rotatePhase(π / 3);
-Alpha ≡ Beta if coherence(Alpha, Beta) > 0.85;
-route(Alpha → Gamma) via [Beta, Delta];
+```typescript
+import { 
+  Quaternion, 
+  Sedenion, 
+  Complex,
+  FanoPlane,
+  HilbertSpace 
+} from '@sschepis/resolang';
+
+// Quaternion operations
+const q1 = new Quaternion(1, 0, 0, 0);
+const q2 = Quaternion.fromAxisAngle(0, 1, 0, Math.PI / 2);
+const product = q1.multiply(q2);
+
+// Sedenion (16D hypercomplex)
+const s = new Sedenion(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+const norm = s.norm();
+
+// Complex arithmetic
+const c1 = new Complex(1, 2);
+const c2 = Complex.fromPolar(1, Math.PI / 4);
+const sum = c1.add(c2);
 ```
 
-### 2.4 Functional Blocks
+## Building from Source
 
-```resolang
-fn stabilize(node: EntangledNode): Bool {
-  return entropyRate(node.phaseRing) < -0.03 and coherence(node) > 0.9;
-}
+```bash
+# Install dependencies
+npm install
 
-fn teleport(mem: ResonantFragment, to: EntangledNode): Bool {
-  if entangled(thisNode, to) and coherence(to) > 0.85 {
-    emit mem ⇝ to;
-    return true;
-  }
-  return false;
-}
+# Build WASM modules
+npm run build
+
+# Run tests
+npm test
+
+# Build debug version
+npm run asbuild:debug
 ```
 
-### 2.5 Entropy Monitoring
-
-```resolang
-watch node.phaseRing => drift;
-if drift > 0.2 {
-  stabilize(node);
-}
-```
-
-### 2.6 Collapse Conditions
-
-```resolang
-collapse MemoryA if entropy(MemoryA) < 0.1 and coherence(currentNode) > 0.92;
-```
-
-### 2.7 Symbolic Pattern Construction
-
-```resolang
-attractor Harmony {
-  primes = [13, 43, 67];
-  targetPhase = align(currentNode.phaseRing);
-  symbol = "UNITY";
-}
-```
-
-### 2.8 Module System
-
-```resolang
-module mind.network.sync
-import mind.operators.entropy
-import symbols.algebraic.constructs
-```
-
-### 2.9 Execution Semantics
-
-- All memory fields evolve per symbolic phase dynamics
-- Functions are synchronous unless marked `nonlocal`
-- Collapse operations are terminal within local scope
-
-### 2.10 Meta-Constructs
-
-```resolang
-@entangled
-fn observe(remote: EntangledNode): Phase[] {
-  return measurePhase(remote.phaseRing);
-}
-
-@resonant
-let Universe = attractor("truth", coherence=1.0);
-```
-
-### 2.11 Runtime Environment
-
-ResoLang is executed on the Prime Resonance Virtual Engine (PRVE), which:
-- Maintains symbolic phase coherence
-- Simulates prime-based field superposition
-- Routes teleportations via resonance gradients
-- Enforces entropy-collision safety during symbolic merges
-
-### 2.12 Example Program
-
-```resolang
-node Observer = generateNode(29, 67, 113);
-fragment Thought = encode("the whole is more than the sum");
-
-@resonant
-if coherence(Observer) > 0.9 {
-  teleport(Thought, Observer);
-}
-```
-
----
-
-## 3. Implementation & Infrastructure
-
-### 3.1 Project Structure
+## Project Structure
 
 ```
 resolang/
-├── assembly/                    # AssemblyScript source files
-│   ├── core/                   # NEW: Core infrastructure modules
-│   │   ├── serialization.ts    # Centralized JSON serialization
-│   │   ├── math-optimized.ts   # Optimized mathematical operations
-│   │   ├── object-pool.ts      # Object pooling for memory efficiency
-│   │   ├── base-interfaces.ts  # Comprehensive interface definitions
-│   │   ├── base-classes.ts     # Abstract base implementations
-│   │   ├── error-handling.ts   # Unified error management
-│   │   ├── validation.ts       # Reusable validation framework
-│   │   ├── plugin-system.ts    # Plugin architecture
-│   │   ├── event-system.ts     # Event-driven communication
-│   │   ├── module-interfaces.ts # Module contracts
-│   │   ├── config-loader.ts    # Configuration management
-│   │   ├── middleware.ts       # Middleware pattern
-│   │   └── factory-pattern.ts  # Component factories
-│   ├── prn-node.ts             # Core network node implementation
-│   ├── prn-protocols.ts        # Network communication protocols
-│   ├── prn-quantum-ops.ts      # Quantum operation executors
-│   └── prn-network-manager.ts  # Centralized network management
-├── build/                      # Compiled WASM modules
-│   ├── prn-node.wasm
-│   ├── prn-protocols.wasm
-│   ├── prn-quantum-ops.wasm
-│   └── prn-network-manager.wasm
-├── prn-bootstrap.js            # Network bootstrap service
-├── test-prn.js                 # Unified test suite
-└── package.json                # Build scripts and dependencies
+├── assembly/                 # AssemblyScript source
+│   ├── core/                # Core infrastructure
+│   │   ├── math.ts          # Prime mathematics
+│   │   ├── validation.ts    # Validation framework
+│   │   ├── serialization.ts # JSON serialization
+│   │   └── ...
+│   ├── quantum/             # Quantum operations
+│   ├── identity/            # Identity management
+│   ├── pipelines/           # Pipeline system
+│   ├── sentient/            # Sentient observer
+│   ├── examples/            # Code examples
+│   │   ├── basic-quantum-operations.ts
+│   │   ├── practical-applications.ts
+│   │   └── ...
+│   ├── resolang.ts          # Core types
+│   ├── operators.ts         # Quantum operators
+│   ├── discrete-observer.ts # Discrete dynamics
+│   ├── sentient.ts          # Sentient core
+│   ├── smf.ts               # Sedenion memory field
+│   └── index.ts             # Main exports
+├── build/                   # Compiled WASM output
+│   ├── resolang.wasm
+│   ├── resolang.js
+│   └── resolang.browser.js
+├── docs/                    # Documentation
+│   ├── api-reference.md
+│   └── user-guide.md
+└── test/                    # Test files
 ```
 
-### 3.2 Key Components
+## API Documentation
 
-#### Network Node (`assembly/prn-node.ts`)
-- **NetworkNode**: Core node class with quantum state management
-- **PrimeResonanceIdentity (PRI)**: Triple of Gaussian, Eisenstein, and Quaternionic primes
-- **Entanglement Management**: Tracks connections and coherence between nodes
-- **Holographic Memory**: Prime-coefficient based memory storage
+For detailed API documentation, see:
+- [API Reference](docs/api-reference.md)
+- [User Guide](docs/user-guide.md)
+- [Examples README](assembly/examples/README.md)
+- [Identity System Overview](assembly/identity/SYSTEM_OVERVIEW.md)
 
-#### Network Protocols (`assembly/prn-protocols.ts`)
-- **EIP**: Entanglement Initialization Protocol
-- **MTP**: Memory Teleportation Protocol
-- **RRP**: Resonance Routing Protocol
-- **Phase Sync**: Automatic phase synchronization
+## Examples
 
-#### Quantum Operations (`assembly/prn-quantum-ops.ts`)
-- **Superposition**: Create quantum superpositions of prime states
-- **Measurement**: Collapse quantum states to specific values
-- **Teleportation**: Transfer memory between entangled nodes
-- **Phase Shifting**: Adjust quantum phases
+The `assembly/examples/` directory contains comprehensive examples:
 
-#### Network Manager (`assembly/prn-network-manager.ts`)
-- Centralized node registry
-- Global network operations
-- Status reporting and monitoring
+1. **Basic Quantum Operations** — State creation, tensor products, collapse
+2. **Network Topology & Routing** — Ring, star, mesh topologies
+3. **Identity & Domain Management** — RBAC, KYC, domain hierarchies
+4. **Runtime Instructions (RISA)** — Low-level assembly programming
+5. **Mathematical Foundations** — Complex numbers, quaternions, prime fields
+6. **Practical Applications** — Error correction, key exchange, ML
 
-#### Bootstrap Service (`prn-bootstrap.js`)
-- HTTP API (port 8888)
-- WebSocket support (port 8889)
-- Automatic health monitoring
-- Phase synchronization
-
-### 3.3 Network Concepts
-
-#### Coherence
-Each node maintains a coherence value (0-1) that represents its quantum stability. Higher coherence enables better entanglement.
-
-#### Entanglement
-Nodes can form quantum entanglements with each other, enabling:
-- Memory teleportation
-- Phase synchronization
-- Quantum operations
-
-#### Prime Resonance Identity (PRI)
-Each node has a unique identity composed of three prime numbers from different algebraic domains:
-- Gaussian prime (complex integers)
-- Eisenstein prime (Eisenstein integers)
-- Quaternionic prime (Hurwitz quaternions)
-
----
-
-## 4. Quick Start
-
-### Build the Project
-```bash
-npm install
-npm run build
-```
-
-### Start the Network
-```bash
-npm run network:start
-```
-
-### Run Tests
-```bash
-npm test
-```
-
-### Check Network Status
-```bash
-npm run network:status
-# or
-curl http://localhost:8888/status
-```
-
----
-
-## 5. API Reference
-
-### GET /status
-Returns the current network status including all nodes and their entanglements.
-
-### POST /node/create
-Create a new node in the network.
-```json
-{
-  "nodeId": "node-name"
-}
-```
-
-### POST /node/connect
-Establish entanglement between two nodes.
-```json
-{
-  "nodeId1": "node1",
-  "nodeId2": "node2",
-  "strength": 0.9
-}
-```
-
----
-
-## 6. Development Guide
-
-### Adding New Quantum Operations
-1. Implement the operation in `assembly/prn-quantum-ops.ts`
-2. Add corresponding network protocol support if needed
-3. Update the network manager to expose the operation
-4. Add tests to `test-prn.js`
-
-### Extending the Network
-1. Define new message types in protocols
-2. Implement handlers in the network manager
-3. Update the bootstrap service for API exposure
-
-### Using the Refactored Architecture
-
-#### Serialization
 ```typescript
-import { JSONBuilder } from "./core/serialization";
+import { runAllResoLangExamples, runExamplesByCategory } from '@sschepis/resolang';
 
-const json = new JSONBuilder()
-  .startObject()
-  .addStringField("id", nodeId)
-  .addNumberField("coherence", 0.95)
-  .endObject()
-  .build();
+// Run all examples
+runAllResoLangExamples();
+
+// Run specific category
+runExamplesByCategory("quantum");
 ```
 
-#### Error Handling
-```typescript
-import { PRNError, ErrorCode } from "./core/error-handling";
+## Performance
 
-throw new PRNError(
-  ErrorCode.VALIDATION_FAILED,
-  "Invalid prime resonance identity"
-);
-```
+Built with WebAssembly for optimal performance:
 
-#### Validation
-```typescript
-import { ValidatorBuilder } from "./core/validation";
+| Operation | Performance |
+|-----------|-------------|
+| Prime Generation | ~180ms (optimized) |
+| Modular Exponentiation | ~35ms (3.4x improvement) |
+| Array Operations | ~20ms (SIMD vectorized) |
+| JSON Serialization | ~8ms (minimal allocations) |
 
-const validator = new ValidatorBuilder<NodeConfig>()
-  .addRule(c => c.coherence >= 0, "Coherence must be non-negative")
-  .addRule(c => c.coherence <= 1, "Coherence must not exceed 1")
-  .build();
-```
+## Browser Compatibility
 
-#### Plugin Development
-```typescript
-import { Plugin, PluginContext } from "./core/plugin-system";
-
-export class MyPlugin implements Plugin {
-  name = "my-plugin";
-  version = "1.0.0";
-  
-  async initialize(context: PluginContext): Promise<void> {
-    // Plugin initialization
-  }
-}
-```
-
----
-
-## 7. Architecture & Design Patterns
-
-### 7.1 Core Infrastructure
-
-The PRN codebase has been refactored to follow enterprise design patterns:
-
-- **Serialization**: Centralized JSON building with type-safe fluent API
-- **Base Classes**: Comprehensive hierarchy for common functionality
-- **Error Management**: Unified error handling with recovery strategies
-- **Validation Framework**: Reusable validators with composable rules
-- **Plugin System**: Extensible architecture with dependency injection
-- **Event System**: Decoupled communication via event bus
-- **Module System**: Pluggable components with standardized interfaces
-- **Middleware Pattern**: Chain of responsibility for protocol processing
-- **Factory Pattern**: Abstract factories for component families
-
-### 7.2 Design Principles
-
-- **Interface Segregation**: Small, focused interfaces
-- **Dependency Inversion**: Depend on abstractions, not concretions
-- **Single Responsibility**: Each class has one reason to change
-- **Open/Closed**: Open for extension, closed for modification
-- **DRY**: Don't Repeat Yourself - centralized common functionality
-
-### 7.3 Key Patterns
-
-- **Builder Pattern**: Fluent APIs for complex object construction
-- **Object Pool**: Reuse frequently allocated objects
-- **Observer Pattern**: Event-driven architecture
-- **Strategy Pattern**: Pluggable algorithms and behaviors
-- **Chain of Responsibility**: Middleware pipeline
-- **Abstract Factory**: Component family creation
-
----
-
-## 8. Performance Optimizations
-
-### 8.1 Mathematical Operations
-
-- **Montgomery Multiplication**: 3-4x faster modular arithmetic
-- **Deterministic Miller-Rabin**: Optimized primality testing
-- **SIMD Operations**: Vectorized array computations
-- **Prime Caching**: LRU cache for frequently used primes
-
-### 8.2 Memory Management
-
-- **Object Pooling**: Reduced GC pressure for frequent allocations
-- **Lazy Initialization**: Defer expensive computations
-- **Efficient Serialization**: Minimal string allocations
-
-### 8.3 Benchmarks
-
-| Operation | Before | After | Improvement |
-|-----------|--------|-------|-------------|
-| Modular Exponentiation | 120ms | 35ms | 3.4x |
-| Prime Generation | 450ms | 180ms | 2.5x |
-| Array Operations | 80ms | 20ms | 4.0x |
-| JSON Serialization | 15ms | 8ms | 1.9x |
-
----
-
-## 9. Future Extensions
-
-### Theoretical Extensions
-- Higher-dimensional phase field modeling
-- Real-time biometric entanglement interface
-- Symbolic compilation to holographic memory patterns
-
-### Implementation Extensions
-- **ResoLang Integration**: Connect the quantum operations to the ResoLang runtime
-- **State Persistence**: Implement saving/loading of network state
-- **Distributed Mode**: Enable multi-machine network deployment
-- **Performance Optimization**: Further WASM optimizations
-- **Validation Decorators**: Awaiting AssemblyScript decorator support
-
----
-
-## Documentation
-
-### Core Documentation
-- [Final Refactoring Report](assembly/core/FINAL_REFACTORING_REPORT.md)
-- [Implementation Guide](assembly/core/IMPLEMENTATION_GUIDE.md)
-- [Quick Reference](assembly/core/QUICK_REFERENCE.md)
-
-### Pattern Guides
-- [Factory Pattern Guide](assembly/core/FACTORY_PATTERN_GUIDE.md)
-- [Serialization Migration Status](assembly/core/SERIALIZATION_MIGRATION_STATUS.md)
-
----
-
-## License
-
-This project is released under the MIT License. See LICENSE file for details.
+- Chrome 57+
+- Firefox 52+
+- Safari 11+
+- Edge 16+
+- Node.js 8+
 
 ## Contributing
 
 Contributions are welcome! Please read our contributing guidelines before submitting PRs.
 
-## Contact
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing`)
+5. Open a Pull Request
 
-For questions and support, please open an issue in the GitHub repository.
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Author
+
+**Sebastian Schepis**
+
+---
+
+*ResoLang: Quantum-inspired symbolic computing for the modern web*
