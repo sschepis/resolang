@@ -1,15 +1,40 @@
 {
   "name": "@sschepis/resolang",
-  "version": "0.1.2",
+  "version": "0.4.1",
   "type": "module",
-  "main": "build/resolang.js",
-  "types": "build/resolang.d.ts",
+  "main": "build/resolang.browser.js",
+  "types": "build/resolang.browser.d.ts",
   "exports": {
     ".": {
+      "browser": {
+        "import": "./build/resolang.browser.js",
+        "types": "./build/resolang.browser.d.ts"
+      },
+      "node": {
+        "import": "./build/resolang.js",
+        "types": "./build/resolang.d.ts"
+      },
+      "default": {
+        "import": "./build/resolang.browser.js",
+        "types": "./build/resolang.browser.d.ts"
+      }
+    },
+    "./browser": {
+      "import": "./build/resolang.browser.js",
+      "types": "./build/resolang.browser.d.ts"
+    },
+    "./node": {
       "import": "./build/resolang.js",
       "types": "./build/resolang.d.ts"
+    },
+    "./wasm": {
+      "import": "./build/resolang.wasm"
     }
   },
+  "browser": {
+    "./build/resolang.js": "./build/resolang.browser.js"
+  },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/sschepis/resolang.git"
@@ -37,17 +62,18 @@
     "resolang",
     "prime-resonance",
     "quantum",
-    "network"
+    "network",
+    "wasm",
+    "webassembly",
+    "browser"
   ],
   "author": "",
   "license": "ISC",
-  "description": "ResoLang - Core quantum resonance computation library",
+  "description": "ResoLang - Core quantum resonance computation library for browser and Node.js",
   "devDependencies": {
     "@as-pect/cli": "^8.1.0",
-    "assemblyscript": "^0.27.37"
-  },
-  "dependencies": {
     "@assemblyscript/loader": "^0.27.37",
+    "assemblyscript": "^0.27.37",
     "assemblyscript-json": "^1.1.0",
     "ts-node": "^10.9.2",
     "ws": "^8.16.0"
@@ -55,6 +81,8 @@
   "files": [
     "build/resolang.js",
     "build/resolang.d.ts",
+    "build/resolang.browser.js",
+    "build/resolang.browser.d.ts",
     "build/resolang.wasm",
     "build/resolang.wasm.map",
     "assembly/",

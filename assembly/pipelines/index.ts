@@ -35,6 +35,16 @@ export { MemoryPipeline, createMemoryPipeline } from './memory';
 export { EmbeddingPipeline, createEmbeddingPipeline } from './embedding';
 export { AgentPipeline, AgentResult, AgentState, createAgentPipeline } from './agent';
 
+// Discrete Observer Pipeline (full discrete.pdf implementation)
+export {
+  DiscretePipeline,
+  DiscreteConfig,
+  DiscreteTickResult,
+  createDiscretePipeline,
+  createFastDiscretePipeline,
+  createPreciseDiscretePipeline
+} from './discrete';
+
 // Factory and builder
 export {
   PipelineFactory,

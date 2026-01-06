@@ -198,3 +198,63 @@ export {
 // ============================================================================
 
 export * from './pipelines/index';
+
+// ============================================================================
+// Discrete Observer (Full discrete.pdf specification implementation)
+// ============================================================================
+
+export {
+  DiscreteObserverConfig,
+  DiscreteObserverState,
+  DiscreteStepResult,
+  DISCRETE_CONFIG,
+  DEFAULT_PRIMES,
+  ENOCHIAN_PRIMES,
+  // Core functions
+  computeDiscreteCoupling,
+  computeHistogramCoherence,
+  computeWindowedStability,
+  getActiveIndices,
+  getActiveIndicesForLearning,
+  primeToSMFAxis,
+  compositionVector,
+  normalizeSMF,
+  computeSmfEntropy,
+  updateSMF,
+  applyHebbianLearning,
+  decayLearnedCoupling,
+  getLearnedCoupling,
+  getLearnedCouplingStrength,
+  detectLockup,
+  applyControlledTunneling,
+  discreteStep,
+  // Control functions
+  dampenAll,
+  randomizeCoupling,
+  resetCoupling,
+  getStateMetrics,
+  getPhases,
+  getAmplitudes,
+  getSMF,
+  getWeights,
+  isLockedUp,
+  boostPrime,
+  boostIndex,
+  // WASM exports
+  createDiscreteObserver,
+  discreteObserverStep,
+  discreteObserverBoost,
+  discreteObserverGetCoherence,
+  discreteObserverGetPhase,
+  discreteObserverGetAmplitude,
+  discreteObserverGetSMFAxis,
+  discreteObserverGetTickCount,
+  discreteObserverGetEntropy,
+  discreteObserverReset,
+  discreteObserverGetCount,
+  discreteObserverGetState,
+  discreteObserverGetLearnedCouplingStrength,
+  discreteObserverGetLearnedCoupling,
+  discreteObserverApplyHebbianLearning,
+  discreteObserverDecayLearnedCoupling
+} from './discrete-observer';

@@ -12,16 +12,16 @@ async function instantiate(module, imports = {}) {
           throw Error(`${message} in ${fileName}:${lineNumber}:${columnNumber}`);
         })();
       },
-      "Date.now"() {
-        // ~lib/bindings/dom/Date.now() => f64
-        return Date.now();
-      },
       seed() {
         // ~lib/builtins/seed() => f64
         return (() => {
           // @external.js
           return Date.now() * Math.random();
         })();
+      },
+      "Date.now"() {
+        // ~lib/bindings/dom/Date.now() => f64
+        return Date.now();
       },
       "console.log"(text) {
         // ~lib/bindings/dom/console.log(~lib/string/String) => void
@@ -105,6 +105,187 @@ async function instantiate(module, imports = {}) {
       // assembly/sentient/getSentientState() => ~lib/string/String
       return __liftString(exports.getSentientState() >>> 0);
     },
+    DISCRETE_CONFIG: {
+      // assembly/discrete-observer/DISCRETE_CONFIG: assembly/discrete-observer/DiscreteObserverConfig
+      valueOf() { return this.value; },
+      get value() {
+        return __liftRecord199(exports.DISCRETE_CONFIG.value >>> 0);
+      }
+    },
+    DEFAULT_PRIMES: {
+      // assembly/discrete-observer/DEFAULT_PRIMES: ~lib/array/Array<i32>
+      valueOf() { return this.value; },
+      get value() {
+        return __liftArray(__getI32, 2, exports.DEFAULT_PRIMES.value >>> 0);
+      }
+    },
+    ENOCHIAN_PRIMES: {
+      // assembly/discrete-observer/ENOCHIAN_PRIMES: ~lib/array/Array<i32>
+      valueOf() { return this.value; },
+      get value() {
+        return __liftArray(__getI32, 2, exports.ENOCHIAN_PRIMES.value >>> 0);
+      }
+    },
+    computeDiscreteCoupling(state, i) {
+      // assembly/discrete-observer/computeDiscreteCoupling(assembly/discrete-observer/DiscreteObserverState, i32) => i32
+      state = __lowerInternref(state) || __notnull();
+      return exports.computeDiscreteCoupling(state, i);
+    },
+    computeHistogramCoherence(state) {
+      // assembly/discrete-observer/computeHistogramCoherence(assembly/discrete-observer/DiscreteObserverState) => f64
+      state = __lowerInternref(state) || __notnull();
+      return exports.computeHistogramCoherence(state);
+    },
+    computeWindowedStability(state) {
+      // assembly/discrete-observer/computeWindowedStability(assembly/discrete-observer/DiscreteObserverState) => f64
+      state = __lowerInternref(state) || __notnull();
+      return exports.computeWindowedStability(state);
+    },
+    getActiveIndices(state) {
+      // assembly/discrete-observer/getActiveIndices(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Int32Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Int32Array, exports.getActiveIndices(state) >>> 0);
+    },
+    getActiveIndicesForLearning(state) {
+      // assembly/discrete-observer/getActiveIndicesForLearning(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Int32Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Int32Array, exports.getActiveIndicesForLearning(state) >>> 0);
+    },
+    compositionVector(u, v) {
+      // assembly/discrete-observer/compositionVector(i32, i32) => ~lib/typedarray/Int8Array
+      return __liftTypedArray(Int8Array, exports.compositionVector(u, v) >>> 0);
+    },
+    normalizeSMF(state) {
+      // assembly/discrete-observer/normalizeSMF(assembly/discrete-observer/DiscreteObserverState) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.normalizeSMF(state);
+    },
+    computeSmfEntropy(state) {
+      // assembly/discrete-observer/computeSmfEntropy(assembly/discrete-observer/DiscreteObserverState) => f64
+      state = __lowerInternref(state) || __notnull();
+      return exports.computeSmfEntropy(state);
+    },
+    updateSMF(state, activeIndices) {
+      // assembly/discrete-observer/updateSMF(assembly/discrete-observer/DiscreteObserverState, ~lib/typedarray/Int32Array) => void
+      state = __retain(__lowerInternref(state) || __notnull());
+      activeIndices = __lowerTypedArray(Int32Array, 200, 2, activeIndices) || __notnull();
+      try {
+        exports.updateSMF(state, activeIndices);
+      } finally {
+        __release(state);
+      }
+    },
+    applyHebbianLearning(state, activeIndices) {
+      // assembly/discrete-observer/applyHebbianLearning(assembly/discrete-observer/DiscreteObserverState, ~lib/typedarray/Int32Array) => bool
+      state = __retain(__lowerInternref(state) || __notnull());
+      activeIndices = __lowerTypedArray(Int32Array, 200, 2, activeIndices) || __notnull();
+      try {
+        return exports.applyHebbianLearning(state, activeIndices) != 0;
+      } finally {
+        __release(state);
+      }
+    },
+    decayLearnedCoupling(state, rate) {
+      // assembly/discrete-observer/decayLearnedCoupling(assembly/discrete-observer/DiscreteObserverState, f64?) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.__setArgumentsLength(arguments.length);
+      exports.decayLearnedCoupling(state, rate);
+    },
+    getLearnedCoupling(state, i, j) {
+      // assembly/discrete-observer/getLearnedCoupling(assembly/discrete-observer/DiscreteObserverState, i32, i32) => f32
+      state = __lowerInternref(state) || __notnull();
+      return exports.getLearnedCoupling(state, i, j);
+    },
+    getLearnedCouplingStrength(state) {
+      // assembly/discrete-observer/getLearnedCouplingStrength(assembly/discrete-observer/DiscreteObserverState) => f64
+      state = __lowerInternref(state) || __notnull();
+      return exports.getLearnedCouplingStrength(state);
+    },
+    detectLockup(state, dC) {
+      // assembly/discrete-observer/detectLockup(assembly/discrete-observer/DiscreteObserverState, f64) => bool
+      state = __lowerInternref(state) || __notnull();
+      return exports.detectLockup(state, dC) != 0;
+    },
+    applyControlledTunneling(state) {
+      // assembly/discrete-observer/applyControlledTunneling(assembly/discrete-observer/DiscreteObserverState) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.applyControlledTunneling(state);
+    },
+    discreteStep(state, driveInput, plasticity) {
+      // assembly/discrete-observer/discreteStep(assembly/discrete-observer/DiscreteObserverState, ~lib/typedarray/Float64Array | null?, bool?) => assembly/discrete-observer/DiscreteStepResult
+      state = __retain(__lowerInternref(state) || __notnull());
+      driveInput = __lowerTypedArray(Float64Array, 185, 3, driveInput);
+      plasticity = plasticity ? 1 : 0;
+      try {
+        exports.__setArgumentsLength(arguments.length);
+        return __liftInternref(exports.discreteStep(state, driveInput, plasticity) >>> 0);
+      } finally {
+        __release(state);
+      }
+    },
+    dampenAll(state) {
+      // assembly/discrete-observer/dampenAll(assembly/discrete-observer/DiscreteObserverState) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.dampenAll(state);
+    },
+    randomizeCoupling(state) {
+      // assembly/discrete-observer/randomizeCoupling(assembly/discrete-observer/DiscreteObserverState) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.randomizeCoupling(state);
+    },
+    resetCoupling(state) {
+      // assembly/discrete-observer/resetCoupling(assembly/discrete-observer/DiscreteObserverState) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.resetCoupling(state);
+    },
+    getStateMetrics(state) {
+      // assembly/discrete-observer/getStateMetrics(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Float64Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Float64Array, exports.getStateMetrics(state) >>> 0);
+    },
+    getPhases(state) {
+      // assembly/discrete-observer/getPhases(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Int32Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Int32Array, exports.getPhases(state) >>> 0);
+    },
+    getAmplitudes(state) {
+      // assembly/discrete-observer/getAmplitudes(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Float64Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Float64Array, exports.getAmplitudes(state) >>> 0);
+    },
+    getSMF(state) {
+      // assembly/discrete-observer/getSMF(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Int32Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Int32Array, exports.getSMF(state) >>> 0);
+    },
+    getWeights(state) {
+      // assembly/discrete-observer/getWeights(assembly/discrete-observer/DiscreteObserverState) => ~lib/typedarray/Int32Array
+      state = __lowerInternref(state) || __notnull();
+      return __liftTypedArray(Int32Array, exports.getWeights(state) >>> 0);
+    },
+    isLockedUp(state) {
+      // assembly/discrete-observer/isLockedUp(assembly/discrete-observer/DiscreteObserverState) => bool
+      state = __lowerInternref(state) || __notnull();
+      return exports.isLockedUp(state) != 0;
+    },
+    boostPrime(state, prime) {
+      // assembly/discrete-observer/boostPrime(assembly/discrete-observer/DiscreteObserverState, i32) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.boostPrime(state, prime);
+    },
+    boostIndex(state, index) {
+      // assembly/discrete-observer/boostIndex(assembly/discrete-observer/DiscreteObserverState, i32) => void
+      state = __lowerInternref(state) || __notnull();
+      exports.boostIndex(state, index);
+    },
+    discreteObserverGetState() {
+      // assembly/discrete-observer/discreteObserverGetState() => ~lib/string/String
+      return __liftString(exports.discreteObserverGetState() >>> 0);
+    },
+    discreteObserverApplyHebbianLearning() {
+      // assembly/discrete-observer/discreteObserverApplyHebbianLearning() => bool
+      return exports.discreteObserverApplyHebbianLearning() != 0;
+    },
     currentNode: {
       // assembly/resolang/currentNode: assembly/resolang/EntangledNode | null
       valueOf() { return this.value; },
@@ -175,7 +356,7 @@ async function instantiate(module, imports = {}) {
       // assembly/operators/route(assembly/resolang/EntangledNode, assembly/resolang/EntangledNode, ~lib/array/Array<assembly/resolang/EntangledNode>) => bool
       source = __retain(__lowerInternref(source) || __notnull());
       target = __retain(__lowerInternref(target) || __notnull());
-      viaNodes = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 228, 2, viaNodes) || __notnull();
+      viaNodes = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 233, 2, viaNodes) || __notnull();
       try {
         return exports.route(source, target, viaNodes) != 0;
       } finally {
@@ -721,7 +902,7 @@ async function instantiate(module, imports = {}) {
     quantumProcessTransfer(request, approvers) {
       // assembly/identity/resolang-processor/quantumProcessTransfer(assembly/identity/ownership-transfer/TransferRequest, ~lib/array/Array<assembly/identity/interfaces/IIdentity>) => bool
       request = __retain(__lowerInternref(request) || __notnull());
-      approvers = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 269, 2, approvers) || __notnull();
+      approvers = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 274, 2, approvers) || __notnull();
       try {
         return exports.quantumProcessTransfer(request, approvers) != 0;
       } finally {
@@ -731,7 +912,7 @@ async function instantiate(module, imports = {}) {
     quantumRecoverIdentity(lostIdentityId, recoveryIdentities, requiredSignatures) {
       // assembly/identity/resolang-processor/quantumRecoverIdentity(~lib/string/String, ~lib/array/Array<assembly/identity/interfaces/IIdentity>, i32?) => bool
       lostIdentityId = __retain(__lowerString(lostIdentityId) || __notnull());
-      recoveryIdentities = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 269, 2, recoveryIdentities) || __notnull();
+      recoveryIdentities = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 274, 2, recoveryIdentities) || __notnull();
       try {
         exports.__setArgumentsLength(arguments.length);
         return exports.quantumRecoverIdentity(lostIdentityId, recoveryIdentities, requiredSignatures) != 0;
@@ -1274,7 +1455,7 @@ async function instantiate(module, imports = {}) {
     createState(type, vars, constraints) {
       // assembly/pnp-exports/createState(i32, ~lib/array/Array<i32>, ~lib/array/Array<assembly/examples/universal-symbolic-transformer/UniversalConstraint>) => assembly/examples/universal-symbolic-transformer/UniversalSymbolicState
       vars = __retain(__lowerArray(__setU32, 33, 2, vars) || __notnull());
-      constraints = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 207, 2, constraints) || __notnull();
+      constraints = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 212, 2, constraints) || __notnull();
       try {
         return __liftInternref(exports.createState(type, vars, constraints) >>> 0);
       } finally {
@@ -1298,7 +1479,7 @@ async function instantiate(module, imports = {}) {
     encodeProblem(problem_type, variables, raw_constraints, weights) {
       // assembly/pnp-exports/encodeProblem(i32, ~lib/array/Array<i32>, ~lib/array/Array<~lib/array/Array<i32>>, ~lib/array/Array<f64>) => assembly/examples/universal-symbolic-transformer/UniversalSymbolicState
       variables = __retain(__lowerArray(__setU32, 33, 2, variables) || __notnull());
-      raw_constraints = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerArray(__setU32, 33, 2, value) || __notnull()); }, 208, 2, raw_constraints) || __notnull());
+      raw_constraints = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerArray(__setU32, 33, 2, value) || __notnull()); }, 213, 2, raw_constraints) || __notnull());
       weights = __lowerArray(__setF64, 7, 3, weights) || __notnull();
       try {
         return __liftInternref(exports.encodeProblem(problem_type, variables, raw_constraints, weights) >>> 0);
@@ -1364,7 +1545,7 @@ async function instantiate(module, imports = {}) {
       // assembly/runtime-exports/processTransferRequest(assembly/runtime/processor/IdentityResoLangProcessor, assembly/identity/ownership-transfer/TransferRequest, ~lib/array/Array<assembly/identity/interfaces/IIdentity>) => bool
       processor = __retain(__lowerInternref(processor) || __notnull());
       request = __retain(__lowerInternref(request) || __notnull());
-      approvers = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 269, 2, approvers) || __notnull();
+      approvers = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 274, 2, approvers) || __notnull();
       try {
         return exports.processTransferRequest(processor, request, approvers) != 0;
       } finally {
@@ -1376,7 +1557,7 @@ async function instantiate(module, imports = {}) {
       // assembly/runtime-exports/recoverIdentity(assembly/runtime/processor/IdentityResoLangProcessor, ~lib/string/String, ~lib/array/Array<assembly/identity/interfaces/IIdentity>, i32?) => bool
       processor = __retain(__lowerInternref(processor) || __notnull());
       lostIdentityId = __retain(__lowerString(lostIdentityId) || __notnull());
-      recoveryIdentities = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 269, 2, recoveryIdentities) || __notnull();
+      recoveryIdentities = __lowerArray((pointer, value) => { __setU32(pointer, __lowerRecord101(value) || __notnull()); }, 274, 2, recoveryIdentities) || __notnull();
       try {
         exports.__setArgumentsLength(arguments.length);
         return exports.recoverIdentity(processor, lostIdentityId, recoveryIdentities, requiredSignatures) != 0;
@@ -1530,7 +1711,7 @@ async function instantiate(module, imports = {}) {
     },
     symbolicCompute(inputStates, maxIterations, coherenceThreshold) {
       // assembly/hilbert/symbolicCompute(~lib/array/Array<assembly/hilbert/PrimeHilbertState>, i32?, f64?) => assembly/hilbert/SymbolicComputeResult | null
-      inputStates = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 289, 2, inputStates) || __notnull();
+      inputStates = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 294, 2, inputStates) || __notnull();
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.symbolicCompute(inputStates, maxIterations, coherenceThreshold) >>> 0);
     },
@@ -1547,8 +1728,8 @@ async function instantiate(module, imports = {}) {
     resonantAttention(query, keys, values, temperature) {
       // assembly/rformer/resonantAttention(assembly/rformer/SparsePrimeState, ~lib/array/Array<assembly/rformer/SparsePrimeState>, ~lib/array/Array<assembly/rformer/SparsePrimeState>, f64?) => assembly/rformer/SparsePrimeState
       query = __retain(__lowerInternref(query) || __notnull());
-      keys = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 299, 2, keys) || __notnull());
-      values = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 299, 2, values) || __notnull();
+      keys = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 304, 2, keys) || __notnull());
+      values = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 304, 2, values) || __notnull();
       try {
         exports.__setArgumentsLength(arguments.length);
         return __liftInternref(exports.resonantAttention(query, keys, values, temperature) >>> 0);
@@ -1560,8 +1741,8 @@ async function instantiate(module, imports = {}) {
     multiHeadResonantAttention(query, keys, values, numHeads, temperature) {
       // assembly/rformer/multiHeadResonantAttention(assembly/rformer/SparsePrimeState, ~lib/array/Array<assembly/rformer/SparsePrimeState>, ~lib/array/Array<assembly/rformer/SparsePrimeState>, i32?, f64?) => assembly/rformer/SparsePrimeState
       query = __retain(__lowerInternref(query) || __notnull());
-      keys = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 299, 2, keys) || __notnull());
-      values = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 299, 2, values) || __notnull();
+      keys = __retain(__lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 304, 2, keys) || __notnull());
+      values = __lowerArray((pointer, value) => { __setU32(pointer, __lowerInternref(value) || __notnull()); }, 304, 2, values) || __notnull();
       try {
         exports.__setArgumentsLength(arguments.length);
         return __liftInternref(exports.multiHeadResonantAttention(query, keys, values, numHeads, temperature) >>> 0);
@@ -1586,33 +1767,47 @@ async function instantiate(module, imports = {}) {
     ))({}),
     createSemanticPipeline(config) {
       // assembly/pipelines/semantic/createSemanticPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/semantic/SemanticPipeline
-      config = __lowerRecord300(config);
+      config = __lowerRecord305(config);
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.createSemanticPipeline(config) >>> 0);
     },
     createCognitivePipeline(config) {
       // assembly/pipelines/cognitive/createCognitivePipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/cognitive/CognitivePipeline
-      config = __lowerRecord300(config);
+      config = __lowerRecord305(config);
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.createCognitivePipeline(config) >>> 0);
     },
     createMemoryPipeline(config) {
       // assembly/pipelines/memory/createMemoryPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/memory/MemoryPipeline
-      config = __lowerRecord300(config);
+      config = __lowerRecord305(config);
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.createMemoryPipeline(config) >>> 0);
     },
     createEmbeddingPipeline(config) {
       // assembly/pipelines/embedding/createEmbeddingPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/embedding/EmbeddingPipeline
-      config = __lowerRecord300(config);
+      config = __lowerRecord305(config);
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.createEmbeddingPipeline(config) >>> 0);
     },
     createAgentPipeline(config) {
       // assembly/pipelines/agent/createAgentPipeline(assembly/pipelines/types/PipelineConfig | null?) => assembly/pipelines/agent/AgentPipeline
-      config = __lowerRecord300(config);
+      config = __lowerRecord305(config);
       exports.__setArgumentsLength(arguments.length);
       return __liftInternref(exports.createAgentPipeline(config) >>> 0);
+    },
+    createDiscretePipeline(config) {
+      // assembly/pipelines/discrete/createDiscretePipeline(assembly/pipelines/discrete/DiscreteConfig | null?) => assembly/pipelines/discrete/DiscretePipeline
+      config = __lowerRecord324(config);
+      exports.__setArgumentsLength(arguments.length);
+      return __liftInternref(exports.createDiscretePipeline(config) >>> 0);
+    },
+    createFastDiscretePipeline() {
+      // assembly/pipelines/discrete/createFastDiscretePipeline() => assembly/pipelines/discrete/DiscretePipeline
+      return __liftInternref(exports.createFastDiscretePipeline() >>> 0);
+    },
+    createPreciseDiscretePipeline() {
+      // assembly/pipelines/discrete/createPreciseDiscretePipeline() => assembly/pipelines/discrete/DiscretePipeline
+      return __liftInternref(exports.createPreciseDiscretePipeline() >>> 0);
     },
   }, exports);
   function __liftRecord181(pointer) {
@@ -1625,6 +1820,40 @@ async function instantiate(module, imports = {}) {
       resonanceStrength: __getF64(pointer + 16),
       collapseThreshold: __getF64(pointer + 24),
       historyLength: __getI32(pointer + 32),
+    };
+  }
+  function __liftRecord199(pointer) {
+    // assembly/discrete-observer/DiscreteObserverConfig
+    // Hint: Opt-out from lifting as a record by providing an empty constructor
+    if (!pointer) return null;
+    return {
+      M: __getI32(pointer + 0),
+      c: __getI32(pointer + 4),
+      d: __getI32(pointer + 8),
+      K: __getI32(pointer + 12),
+      scale: __getI32(pointer + 16),
+      A_max: __getF64(pointer + 24),
+      delta: __getF64(pointer + 32),
+      B: __getI32(pointer + 40),
+      H: __getI32(pointer + 44),
+      C_th: __getF64(pointer + 48),
+      epsilon_C: __getF64(pointer + 56),
+      tau_Var: __getF64(pointer + 64),
+      C_lock: __getF64(pointer + 72),
+      dC_lock: __getF64(pointer + 80),
+      tunnelCooldown: __getI32(pointer + 88),
+      entropyFloor: __getF64(pointer + 96),
+      entropyCeiling: __getF64(pointer + 104),
+      J_max: __getI32(pointer + 112),
+      W_max: __getI32(pointer + 116),
+      L: __getI32(pointer + 120),
+      learningRate: __getF64(pointer + 128),
+      learnedCouplingWeight: __getF64(pointer + 136),
+      learningThreshold: __getF64(pointer + 144),
+      lockupDetectionWindow: __getI32(pointer + 152),
+      perturbationStrength: __getF64(pointer + 160),
+      maxTotalEnergy: __getF64(pointer + 168),
+      targetMaxActive: __getI32(pointer + 176),
     };
   }
   function __lowerRecord101(value) {
@@ -1647,11 +1876,11 @@ async function instantiate(module, imports = {}) {
       lyapunovStableThreshold: __getF64(pointer + 32),
     };
   }
-  function __lowerRecord300(value) {
+  function __lowerRecord305(value) {
     // assembly/pipelines/types/PipelineConfig
     // Hint: Opt-out from lowering as a record by providing an empty constructor
     if (value == null) return 0;
-    const pointer = exports.__pin(exports.__new(80, 300));
+    const pointer = exports.__pin(exports.__new(80, 305));
     __setU32(pointer + 0, value.numPrimes);
     __setU32(pointer + 4, value.historyLength);
     __setF64(pointer + 8, value.defaultDt);
@@ -1663,6 +1892,27 @@ async function instantiate(module, imports = {}) {
     __setF64(pointer + 56, value.amplitudeDecayRate);
     __setF64(pointer + 64, value.kuramotoCoupling);
     __setF64(pointer + 72, value.resonanceStrength);
+    exports.__unpin(pointer);
+    return pointer;
+  }
+  function __lowerRecord324(value) {
+    // assembly/pipelines/discrete/DiscreteConfig
+    // Hint: Opt-out from lowering as a record by providing an empty constructor
+    if (value == null) return 0;
+    const pointer = exports.__pin(exports.__new(80, 324));
+    __setU32(pointer + 0, value.numOscillators);
+    __setU32(pointer + 4, value.phaseResolution);
+    __setF64(pointer + 8, value.amplitudeMax);
+    __setF64(pointer + 16, value.amplitudeDecay);
+    __setF64(pointer + 24, value.activeThreshold);
+    __setF64(pointer + 32, value.baseBoostAmount);
+    __setU32(pointer + 40, value.couplingStrength);
+    __setF64(pointer + 48, value.coherenceThreshold);
+    __setF64(pointer + 56, value.hebbianLearningRate);
+    __setU8(pointer + 64, value.useEnochianPrimes ? 1 : 0);
+    __setU8(pointer + 65, value.enableLockupRecovery ? 1 : 0);
+    __setU32(pointer + 68, value.lockupWindow);
+    __setF64(pointer + 72, value.lockupThreshold);
     exports.__unpin(pointer);
     return pointer;
   }
@@ -1773,6 +2023,14 @@ async function instantiate(module, imports = {}) {
     throw TypeError("value must not be null");
   }
   let __dataview = new DataView(memory.buffer);
+  function __setU8(pointer, value) {
+    try {
+      __dataview.setUint8(pointer, value, true);
+    } catch {
+      __dataview = new DataView(memory.buffer);
+      __dataview.setUint8(pointer, value, true);
+    }
+  }
   function __setU32(pointer, value) {
     try {
       __dataview.setUint32(pointer, value, true);
@@ -1874,6 +2132,53 @@ export const {
   exciteSentientOscillator,
   resetSentientCore,
   getSentientState,
+  DISCRETE_CONFIG,
+  DEFAULT_PRIMES,
+  ENOCHIAN_PRIMES,
+  computeDiscreteCoupling,
+  computeHistogramCoherence,
+  computeWindowedStability,
+  getActiveIndices,
+  getActiveIndicesForLearning,
+  primeToSMFAxis,
+  compositionVector,
+  normalizeSMF,
+  computeSmfEntropy,
+  updateSMF,
+  applyHebbianLearning,
+  decayLearnedCoupling,
+  getLearnedCoupling,
+  getLearnedCouplingStrength,
+  detectLockup,
+  applyControlledTunneling,
+  discreteStep,
+  dampenAll,
+  randomizeCoupling,
+  resetCoupling,
+  getStateMetrics,
+  getPhases,
+  getAmplitudes,
+  getSMF,
+  getWeights,
+  isLockedUp,
+  boostPrime,
+  boostIndex,
+  createDiscreteObserver,
+  discreteObserverStep,
+  discreteObserverBoost,
+  discreteObserverGetCoherence,
+  discreteObserverGetPhase,
+  discreteObserverGetAmplitude,
+  discreteObserverGetSMFAxis,
+  discreteObserverGetTickCount,
+  discreteObserverGetEntropy,
+  discreteObserverReset,
+  discreteObserverGetCount,
+  discreteObserverGetState,
+  discreteObserverGetLearnedCouplingStrength,
+  discreteObserverGetLearnedCoupling,
+  discreteObserverApplyHebbianLearning,
+  discreteObserverDecayLearnedCoupling,
   currentNode,
   setCurrentNode,
   PI,
@@ -2116,6 +2421,9 @@ export const {
   createMemoryPipeline,
   createEmbeddingPipeline,
   createAgentPipeline,
+  createDiscretePipeline,
+  createFastDiscretePipeline,
+  createPreciseDiscretePipeline,
 } = await (async url => instantiate(
   await (async () => {
     const isNodeOrBun = typeof process != "undefined" && process.versions != null && (process.versions.node != null || process.versions.bun != null);
