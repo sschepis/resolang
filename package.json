@@ -1,6 +1,6 @@
 {
   "name": "@sschepis/resolang",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "type": "module",
   "main": "build/resolang.browser.js",
   "types": "build/resolang.browser.d.ts",
@@ -29,6 +29,30 @@
     },
     "./wasm": {
       "import": "./build/resolang.wasm"
+    },
+    "./dsl": {
+      "import": "./dist/dsl/index.js",
+      "types": "./dist/dsl/index.d.ts"
+    },
+    "./dsl/types": {
+      "import": "./dist/dsl/types.js",
+      "types": "./dist/dsl/types.d.ts"
+    },
+    "./dsl/interpreter": {
+      "import": "./dist/dsl/interpreter.js",
+      "types": "./dist/dsl/interpreter.d.ts"
+    },
+    "./dsl/contracts": {
+      "import": "./dist/dsl/contracts.js",
+      "types": "./dist/dsl/contracts.d.ts"
+    },
+    "./dsl/monaco": {
+      "import": "./dist/dsl/monaco.js",
+      "types": "./dist/dsl/monaco.d.ts"
+    },
+    "./dsl/patterns/resonator": {
+      "import": "./dist/dsl/patterns/resonator.js",
+      "types": "./dist/dsl/patterns/resonator.d.ts"
     }
   },
   "browser": {
@@ -47,7 +71,9 @@
     "asbuild:debug": "asc assembly/index.ts --target debug",
     "asbuild:release": "asc assembly/index.ts --target release",
     "asbuild": "npm run asbuild:debug && npm run asbuild:release",
-    "build": "asc assembly/index.ts --target release -o build/resolang.wasm --bindings esm -b build/resolang.js --sourceMap --exportRuntime",
+    "build:wasm": "asc assembly/index.ts --target release -o build/resolang.wasm --bindings esm -b build/resolang.js --sourceMap --exportRuntime",
+    "build:dsl": "tsc -p tsconfig.dsl.json",
+    "build": "npm run build:wasm && npm run build:dsl",
     "build:runtime": "asc assembly/index.ts --target release -o build/resolang.wasm",
     "build:all": "npm run build && npm run build:tests",
     "build:tests": "asc assembly/test-index.ts --target release -o build/test-core.wasm",
@@ -76,6 +102,7 @@
     "assemblyscript": "^0.27.37",
     "assemblyscript-json": "^1.1.0",
     "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "ws": "^8.16.0"
   },
   "files": [
@@ -85,7 +112,12 @@
     "build/resolang.browser.d.ts",
     "build/resolang.wasm",
     "build/resolang.wasm.map",
+    "dist/dsl/",
+    "dsl/",
     "assembly/",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "@aleph-ai/tinyaleph": "^1.6.2"
+  }
 }
